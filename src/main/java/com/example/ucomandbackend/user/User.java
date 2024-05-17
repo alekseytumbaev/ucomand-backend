@@ -1,7 +1,7 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.profession.Profession;
 import com.example.ucomandbackend.user.dto.Gender;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -34,11 +34,8 @@ public class User implements UserDetails {
 
     private Integer age;
 
+    @Schema(description = "Свободная ссылка")
     private String link;
-
-    @ManyToOne
-    @JoinColumn(name = "profession_id")
-    private Profession profession;
 
     @Column(unique = true)
     private String telegram;

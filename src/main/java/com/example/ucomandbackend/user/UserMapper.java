@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.profession.ProfessionMapper;
 import com.example.ucomandbackend.user.dto.UserDto;
 import lombok.experimental.UtilityClass;
 
@@ -11,10 +10,10 @@ public class UserMapper {
         return new UserDto(
                 user.getId(),
                 user.getName(),
+                null,
                 user.getGender(),
                 user.getAge(),
                 user.getLink(),
-                ProfessionMapper.toProfessionDto(user.getProfession()),
                 user.getTelegram(),
                 user.getEmail(),
                 user.getPhone(),
@@ -29,7 +28,6 @@ public class UserMapper {
                 userDto.getGender(),
                 userDto.getAge(),
                 userDto.getLink(),
-                ProfessionMapper.toProfession(userDto.getProfession()),
                 userDto.getTelegram(),
                 userDto.getPhone(),
                 userDto.getEmail(),
