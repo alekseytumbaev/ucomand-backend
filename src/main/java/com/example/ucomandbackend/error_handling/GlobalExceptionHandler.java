@@ -41,7 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(CONFLICT)
     public ErrorResponseDto onDataIntegrityViolationException(DataIntegrityViolationException e) {
         var error = new ErrorResponseDto(
-                BAD_REQUEST.value(),
+                CONFLICT.value(),
                 "Некорректные данные",
                 "Ошибка при сохранении данных в базу: " + e.getMessage(),
                 e.getClass().getName(),
