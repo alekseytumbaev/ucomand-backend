@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.user;
+package com.example.ucomandbackend.user.dto;
 
 public enum UserRole {
     ROOT,

@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.tags;
+package com.example.ucomandbackend.tags.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +15,7 @@ public class TagDto {
     private Long id;
 
     @NotBlank
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 64)
     @Schema(description = "Уникальное")
     private String name;
 

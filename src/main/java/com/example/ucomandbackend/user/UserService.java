@@ -3,14 +3,18 @@ package com.example.ucomandbackend.user;
 import com.example.ucomandbackend.error_handling.NotFoundException;
 import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.security.TokenService;
+import com.example.ucomandbackend.tags.TagService;
+import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.dto.CredentialsDto;
 import com.example.ucomandbackend.user.dto.UserDto;
+import com.example.ucomandbackend.user.dto.UserRole;
 import com.example.ucomandbackend.user.exception.WrongPasswordException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -20,6 +24,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
     private final UserRepository userRepo;
+    private final TagService tagService;
 
     /**
      * @throws NotFoundException
@@ -52,12 +57,21 @@ public class UserService {
         userDto.setId(null);
         User newUser = UserMapper.toUser(
                 userDto,
+                new HashSet<>(tagService.getAllTagsByNames(userDto.getTags().stream().map(TagDto::getName).toList())),
                 passwordEncoder.encode(userDto.getPassword()),
                 role
         );
 
         User savedUser = userRepo.save(newUser);
         return tokenService.generateToken(savedUser);
+    }
+
+    /**
+     * @throws NotFoundException пользователь не найден
+     */
+    public User getUserById(Long id) {
+        return userRepo.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
     }
 
     private Optional<User> findUserByCredentials(CredentialsDto credentialsDto) {
@@ -68,6 +82,5 @@ public class UserService {
             return userRepo.findByEmail(credentialsDto.getEmail());
         }
         return userRepo.findByPhone(credentialsDto.getPhone());
-
     }
 }

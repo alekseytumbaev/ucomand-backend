@@ -5,9 +5,9 @@ import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.user.dto.CredentialsDto;
 import com.example.ucomandbackend.user.dto.UserDto;
 import com.example.ucomandbackend.user.exception.WrongPasswordException;
-import com.example.ucomandbackend.util.Default200Controller;
 import com.example.ucomandbackend.util.OnCreate;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Validated
 @RequiredArgsConstructor
-public class UserController implements Default200Controller {
+@ApiResponses(@ApiResponse(responseCode = "200", useReturnTypeSchema = true))
+public class UserController {
 
     private final UserService userService;
 

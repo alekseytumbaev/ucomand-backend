@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.tags;
+package com.example.ucomandbackend.tags.dto;
 
 public enum TagAvailabilityStatus {
     AVAILABLE,

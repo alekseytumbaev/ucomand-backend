@@ -1,7 +1,8 @@
 package com.example.ucomandbackend.user;
 
+import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.user.dto.Gender;
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.example.ucomandbackend.user.dto.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -9,9 +10,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,18 +27,32 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Long id;
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_tags",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     private Integer age;
 
-    @Schema(description = "Свободная ссылка")
-    private String link;
+    private String freeLink;
+
+    private String ownLink;
+
+    private String aboutMe;
+
+    private OffsetDateTime dateOfRegistration;
+
+    private String cityOfResidence;
 
     @Column(unique = true)
     private String telegram;
