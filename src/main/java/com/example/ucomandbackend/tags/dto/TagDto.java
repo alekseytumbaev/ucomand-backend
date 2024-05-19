@@ -19,6 +19,10 @@ public class TagDto {
     @Schema(description = "Уникальное", example = "Java")
     private String name;
 
+    //TODO потом убрать
+    @Schema(defaultValue = "NONE")
+    private CompetenceLevel competenceLevel = CompetenceLevel.JUNIOR;
+
     @Schema(defaultValue = "MISC")
     private TagType type = TagType.MISC;
 
