@@ -44,5 +44,5 @@ public class Resume {
             joinColumns = @JoinColumn(name = "resume_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     @ToString.Exclude
-    private Set<Tag> tags;
+    private Set<ResumeCompetenceLevelTag> tags;
 }

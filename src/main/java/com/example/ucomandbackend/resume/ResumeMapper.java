@@ -7,13 +7,15 @@ import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserMapper;
 import lombok.experimental.UtilityClass;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class ResumeMapper {
 
-    public ResumeDto toResumeDto(Resume resume) {
+    public ResumeDto toResumeDto(Resume resume, List<ResumeCompetenceLevelTag> resumeLevelTags) {
+
         return new ResumeDto(
                 resume.getId(),
                 UserMapper.toUserDtoWithoutPassword(resume.getUser()),
@@ -23,11 +25,11 @@ public class ResumeMapper {
                 resume.getOwnLink(),
                 resume.getDetails(),
                 resume.getCreationDate(),
-                resume.getTags().stream().map(TagMapper::toTagDto).collect(Collectors.toSet())
+                resumeLevelTags.stream().map(TagMapper::toTagDto).collect(Collectors.toSet())
         );
     }
 
-    public Resume toResume(ResumeDto resumeDto, User user, Set<Tag> tags) {
+    public Resume toResume(ResumeDto resumeDto, User user, Set<ResumeCompetenceLevelTag> resumeLevelTags) {
         return new Resume(
                 resumeDto.getId(),
                 user,
@@ -37,7 +39,7 @@ public class ResumeMapper {
                 resumeDto.getOwnLink(),
                 resumeDto.getDetails(),
                 resumeDto.getCreationDate(),
-                tags
+                resumeLevelTags
         );
     }
 }

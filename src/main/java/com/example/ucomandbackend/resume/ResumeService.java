@@ -42,6 +42,7 @@ public class ResumeService {
         Set<Tag> tags = new HashSet<>(
                 tagService.getAllTagsByNames(resumeDto.getTags().stream().map(TagDto::getName).toList()));
 
+
         var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, tags));
         return ResumeMapper.toResumeDto(resume);
     }

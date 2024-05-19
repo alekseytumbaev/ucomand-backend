@@ -6,6 +6,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.ErrorResponse;
@@ -109,8 +110,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             error.setUserMessage(problemDetail.getDetail());
         }
 
+        if (body instanceof ProblemDetail problemDetail) {
+            error.setUserMessage(problemDetail.getDetail());
+        }
+
         addStackTrace(error, ex);
-        return createResponseEntity(body, headers, statusCode, request);
+        return createResponseEntity(error, headers, statusCode, request);
     }
 
     private void addStackTrace(ErrorResponseDto errorResponseDto, Throwable e) {
