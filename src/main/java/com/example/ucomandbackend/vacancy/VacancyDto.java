@@ -3,7 +3,6 @@ package com.example.ucomandbackend.vacancy;
 import com.example.ucomandbackend.resume.dto.MotivationType;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.dto.UserDto;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -43,5 +43,6 @@ public class Resume {
     @JoinTable(name = "resumes_tags",
             joinColumns = @JoinColumn(name = "resume_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ToString.Exclude
     private Set<Tag> tags;
 }

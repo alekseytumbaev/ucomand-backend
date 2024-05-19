@@ -1,5 +1,6 @@
 package com.example.ucomandbackend.tags;
 
+import com.example.ucomandbackend.tags.dto.CompetenceLevel;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import lombok.experimental.UtilityClass;
 
@@ -10,6 +11,7 @@ public class TagMapper {
         return new TagDto(
                 tag.getId(),
                 tag.getName(),
+                CompetenceLevel.JUNIOR,
                 tag.getType(),
                 tag.getAvailabilityStatus()
         );
