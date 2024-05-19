@@ -7,7 +7,7 @@ services:
       - '8080:8080'
       - '5005:5005'
     environment:
-      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_PROFILES_ACTIVE=ift
       - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n
     depends_on:
       - ucomand-database
@@ -23,13 +23,7 @@ services:
     environment:
       POSTGRES_USER: ucomand
       POSTGRES_PASSWORD: ucomand
-      POSTGRES_DB: ucomnand-db
-    healthcheck:
-      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
-      interval: 10s
-      timeout: 5s
-      start_period: 10s
-      retries: 5
+      POSTGRES_DB: ucomand-db
 
 volumes:
   ucomand-database_data:

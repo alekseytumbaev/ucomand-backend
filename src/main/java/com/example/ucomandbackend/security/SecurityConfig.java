@@ -27,7 +27,7 @@ public class SecurityConfig {
 
     private final Environment env;
 
-    @Value("${spring.h2.console.path}")
+    @Value("${spring.h2.console.path:null}")
     private String h2ConsolePath;
 
     //TODO сконфигурировать корсы перед продом

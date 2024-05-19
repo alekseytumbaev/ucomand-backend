@@ -39,6 +39,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         var professionTags = List.of(
+                new Tag(null, "DEFAULT", TagType.PROFESSION, TagAvailabilityStatus.UNAVAILABLE),
                 new Tag(null, "Администратор", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
                 new Tag(null, "Разработчик", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
                 new Tag(null, "Тестировщик", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),

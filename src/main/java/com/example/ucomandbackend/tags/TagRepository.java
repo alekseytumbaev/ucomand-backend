@@ -29,4 +29,6 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
     Set<Tag> getTagsByResumeId(Long resumeId);
 
     Optional<Tag> getByName(String name);
+
+    Optional<Tag> findByName(String name);
 }

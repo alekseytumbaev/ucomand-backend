@@ -68,4 +68,9 @@ public class TagService {
     public Set<Tag> getTagsByResumeId(Long resumeId) {
         return tagRepo.getTagsByResumeId(resumeId);
     }
+
+    @Transactional(readOnly = true)
+    public Tag getTagByName(String name) {
+        return tagRepo.findByName(name).orElseThrow(() -> new NotFoundException("Тег не найден"));
+    }
 }

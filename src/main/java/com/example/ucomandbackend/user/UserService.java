@@ -21,6 +21,7 @@ import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -61,9 +62,13 @@ public class UserService {
     private TokenDto signUpUserWithRole(UserDto userDto, UserRole role) {
         userDto.setId(null);
         userDto.setDateOfRegistration(OffsetDateTime.now());
+        var tags = userDto.getTags() == null ?
+                Set.of(tagService.getTagByName("DEFAULT")) :
+                new HashSet<>(tagService.getAllTagsByNames(userDto.getTags().stream().map(TagDto::getName).toList()));
+
         User newUser = UserMapper.toUser(
                 userDto,
-                new HashSet<>(tagService.getAllTagsByNames(userDto.getTags().stream().map(TagDto::getName).toList())),
+                tags,
                 passwordEncoder.encode(userDto.getPassword()),
                 role
         );
