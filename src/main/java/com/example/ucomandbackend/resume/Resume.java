@@ -1,10 +1,12 @@
 package com.example.ucomandbackend.resume;
 
+import com.example.ucomandbackend.resume.dto.MotivationType;
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -34,6 +36,8 @@ public class Resume {
     private String ownLink;
 
     private String details;
+
+    private OffsetDateTime creationDate;
 
     @ManyToMany
     @JoinTable(name = "resumes_tags",

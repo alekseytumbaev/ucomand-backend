@@ -6,8 +6,8 @@ import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserRepository;
-import com.example.ucomandbackend.user.dto.UserRole;
 import com.example.ucomandbackend.user.dto.Gender;
+import com.example.ucomandbackend.user.dto.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
@@ -28,8 +29,8 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        addRoot();
         addTags();
+        addRoot();
     }
 
     private void addTags() {
@@ -69,7 +70,7 @@ public class DataInitializer implements CommandLineRunner {
                 1L,
                 "root",
                 null,
-                null,
+                Set.of(tagRepo.getByName("Администратор").get()),
                 Gender.MALE,
                 21,
                 null,

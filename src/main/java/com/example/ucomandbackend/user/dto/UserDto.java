@@ -40,6 +40,7 @@ public class UserDto {
 
     private String aboutMe;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dateOfRegistration;
 
     private String cityOfResidence;
@@ -56,7 +57,9 @@ public class UserDto {
     @Pattern(regexp = "^\\+[1-9]\\d{1,14}$", message = "Номер телефона должен содержать только код страны и цифры")
     private String phone;
 
-    @Schema(description = "При обновлении указывать пароль не обязательно")
+    @Schema(description = "При обновлении указывать пароль не обязательно." +
+            "Пароль должен содержать от 8 до 32 символов, " +
+            "как минимум одну английскую букву, одну цифру и один специальный символ")
     @NotBlank(groups = OnCreate.class)
     @Size(min = 8, max = 32)
     @Pattern(

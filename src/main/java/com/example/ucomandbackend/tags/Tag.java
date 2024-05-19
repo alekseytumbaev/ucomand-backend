@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.tags;
 
-import com.example.ucomandbackend.resume.Resume;
 import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagType;
 import jakarta.persistence.*;
@@ -8,7 +7,6 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor

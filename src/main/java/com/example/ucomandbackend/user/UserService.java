@@ -9,12 +9,17 @@ import com.example.ucomandbackend.user.dto.CredentialsDto;
 import com.example.ucomandbackend.user.dto.UserDto;
 import com.example.ucomandbackend.user.dto.UserRole;
 import com.example.ucomandbackend.user.exception.WrongPasswordException;
+import com.example.ucomandbackend.util.AuthUtils;
+import com.example.ucomandbackend.util.PageableDto;
+import com.example.ucomandbackend.util.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,6 +60,7 @@ public class UserService {
 
     private TokenDto signUpUserWithRole(UserDto userDto, UserRole role) {
         userDto.setId(null);
+        userDto.setDateOfRegistration(OffsetDateTime.now());
         User newUser = UserMapper.toUser(
                 userDto,
                 new HashSet<>(tagService.getAllTagsByNames(userDto.getTags().stream().map(TagDto::getName).toList())),
@@ -69,6 +75,7 @@ public class UserService {
     /**
      * @throws NotFoundException пользователь не найден
      */
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return userRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
@@ -82,5 +89,26 @@ public class UserService {
             return userRepo.findByEmail(credentialsDto.getEmail());
         }
         return userRepo.findByPhone(credentialsDto.getPhone());
+    }
+
+    /**
+     * @throws NotFoundException пользователь не найден
+     */
+    @Transactional(readOnly = true)
+    public UserDto getCurrentUser() {
+        long userId = AuthUtils.extractUserIdFromJwt();
+        return UserMapper.toUserDtoWithoutPassword(getUserById(userId));
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDto> getAllUsers(PageableDto pageableDto) {
+        return userRepo.findAll(PageableMapper.toPageable(pageableDto))
+                .stream()
+                .map(UserMapper::toUserDtoWithoutPassword).toList();
+    }
+
+    @Transactional
+    public void deleteUserById(Long userId) {
+        userRepo.deleteById(userId);
     }
 }

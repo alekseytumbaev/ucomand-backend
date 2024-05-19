@@ -16,7 +16,7 @@ public class TagDto {
 
     @NotBlank
     @Size(min = 1, max = 64)
-    @Schema(description = "Уникальное")
+    @Schema(description = "Уникальное", example = "Java")
     private String name;
 
     @Schema(defaultValue = "MISC")

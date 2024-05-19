@@ -37,6 +37,7 @@ public class User implements UserDetails {
     @JoinTable(name = "users_tags",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ToString.Exclude
     private Set<Tag> tags;
 
     @Enumerated(EnumType.STRING)

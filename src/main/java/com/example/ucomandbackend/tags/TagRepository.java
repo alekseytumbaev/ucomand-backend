@@ -27,4 +27,6 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
             WHERE resumes_tags.resume_id = :resumeId
             """, nativeQuery = true)
     Set<Tag> getTagsByResumeId(Long resumeId);
+
+    Optional<Tag> getByName(String name);
 }
