@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.user.exception;
 
-import com.example.ucomandbackend.error_handling.AbstractOpenApiException;
+import com.example.ucomandbackend.error_handling.common_exception.AbstractOpenApiException;
 
 public class WrongPasswordException extends AbstractOpenApiException {
 

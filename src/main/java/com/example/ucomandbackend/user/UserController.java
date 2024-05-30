@@ -1,13 +1,12 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.user.dto.CredentialsDto;
 import com.example.ucomandbackend.user.dto.UserDto;
 import com.example.ucomandbackend.user.exception.WrongPasswordException;
 import com.example.ucomandbackend.util.OnCreate;
 import com.example.ucomandbackend.util.PageableMapper;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -63,11 +62,9 @@ public class UserController {
     @GetMapping
     public Collection<UserDto> getAllUsers(
             @RequestParam(defaultValue = "0")
-            @Parameter(description = "min: 0")
             @Validated @Min(0) Integer page,
 
             @RequestParam(defaultValue = "10")
-            @Parameter(description = "min: 1")
             @Validated @Min(1) Integer size
     ) {
         return userService.getAllUsers(PageableMapper.toPageableDto(page, size));

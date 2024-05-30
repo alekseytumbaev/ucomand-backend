@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.vacancy;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.tags.TagService;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.UserService;

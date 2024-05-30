@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 import org.springframework.lang.NonNull;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,8 +22,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
-    private final Environment env;
 
     @Value("${spring.h2.console.path:null}")
     private String h2ConsolePath;
@@ -56,7 +52,6 @@ public class SecurityConfig {
 
         configureH2Console(http);
 
-
         //anyRequest обязано быть в конце
         http.authorizeHttpRequests(requests -> requests.anyRequest().permitAll());
         return http.build();
@@ -67,14 +62,7 @@ public class SecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    /**
-     * Если профиль содержит "dev", разрешает доступ к h2
-     */
     private void configureH2Console(HttpSecurity http) throws Exception {
-        if (!env.acceptsProfiles(Profiles.of("dev"))) {
-            return;
-        }
-
         http
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(requests ->

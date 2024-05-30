@@ -3,7 +3,6 @@ package com.example.ucomandbackend.resume;
 import com.example.ucomandbackend.resume.dto.ResumeDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Min;
@@ -47,11 +46,9 @@ public class ResumeController {
     @GetMapping
     @Operation(description = "Если в tagIds пустой список, будут выбраны все резюме")
     public Collection<ResumeDto> getAllResumesByTagIds(@RequestParam(defaultValue = "0")
-                                                       @Parameter(description = "min: 0")
                                                        @Validated @Min(0) Integer page,
 
                                                        @RequestParam(defaultValue = "10")
-                                                       @Parameter(description = "min: 1")
                                                        @Validated @Min(1) Integer size,
 
                                                        @RequestParam(defaultValue = "") List<Long> tagIds) {

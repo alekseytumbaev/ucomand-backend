@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.security.TokenService;
 import com.example.ucomandbackend.tags.TagService;

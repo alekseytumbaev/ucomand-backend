@@ -1,5 +1,6 @@
 package com.example.ucomandbackend.error_handling;
 
+import com.example.ucomandbackend.error_handling.common_exception.AbstractOpenApiException;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.i18n.LocaleContextHolder;

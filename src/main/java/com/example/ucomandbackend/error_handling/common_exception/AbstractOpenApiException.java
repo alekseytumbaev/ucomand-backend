@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.error_handling;
+package com.example.ucomandbackend.error_handling.common_exception;
 
 import lombok.Getter;
 import lombok.Setter;
