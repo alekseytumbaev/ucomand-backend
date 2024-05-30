@@ -45,6 +45,7 @@ public class VacancyService {
                 vacancyRepo.findById(vacancyId).orElseThrow(() -> new NotFoundException("Вакансия не найдена")));
     }
 
+    //TODO только создатель, либо админ
     public void deleteVacancyById(Long vacancyId) {
         vacancyRepo.deleteById(vacancyId);
     }
@@ -53,8 +54,7 @@ public class VacancyService {
         var ownerId = AuthUtils.extractUserIdFromJwt();
         var owner = userService.getUserById(ownerId);
         var tags = tagService.getAllTagsByNames(vacancyDto.getTags().stream().map(TagDto::getName).toList());
-        var profession = owner.getTags() != null && !owner.getTags().isEmpty() ? owner.getTags().iterator().next() : null;
-        var vacancy = VacancyMapper.toVacancy(vacancyDto, owner, profession, new HashSet<>(tags));
+        var vacancy = VacancyMapper.toVacancy(vacancyDto, owner, new HashSet<>(tags));
         return VacancyMapper.toVacancyDto(vacancyRepo.save(vacancy));
     }
 }

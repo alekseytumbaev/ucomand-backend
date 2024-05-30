@@ -11,11 +11,10 @@ import java.util.Set;
 @UtilityClass
 public class VacancyMapper {
 
-    public Vacancy toVacancy(VacancyDto vacancyDto, User user, Tag profession, Set<Tag> tags) {
+    public Vacancy toVacancy(VacancyDto vacancyDto, User user, Set<Tag> tags) {
         return new Vacancy(
                 vacancyDto.getId(),
                 user,
-                profession,
                 tags,
                 vacancyDto.getDescription(),
                 vacancyDto.getPayment(),
@@ -27,7 +26,6 @@ public class VacancyMapper {
         return new VacancyDto(
                 vacancy.getId(),
                 UserMapper.toUserDtoWithoutPassword(vacancy.getOwner()),
-                TagMapper.toTagDto(vacancy.getProfession()),
                 vacancy.getTags().stream().map(TagMapper::toTagDto).toList(),
                 vacancy.getDescription(),
                 vacancy.getPayment(),

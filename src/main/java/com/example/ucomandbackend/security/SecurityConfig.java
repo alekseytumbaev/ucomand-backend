@@ -57,6 +57,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    //TODO поменять енкодер перед продом
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();

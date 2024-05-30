@@ -22,9 +22,6 @@ public class VacancyDto {
     private UserDto owner;
 
     @Valid
-    private TagDto profession;
-
-    @Valid
     private List<TagDto> tags;
 
     @NotBlank

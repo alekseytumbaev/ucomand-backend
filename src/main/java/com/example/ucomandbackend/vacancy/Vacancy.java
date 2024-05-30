@@ -29,10 +29,6 @@ public class Vacancy {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @ManyToOne
-    @JoinColumn(name = "profession_id")
-    private Tag profession;
-
     @ManyToMany
     @JoinTable(name = "vacancies_tags",
             joinColumns = @JoinColumn(name = "vacancy_id"),
