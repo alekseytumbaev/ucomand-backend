@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${spring.h2.console.path:null}")
+    @Value("${spring.h2.console.path:}")
     private String h2ConsolePath;
 
     //TODO сконфигурировать корсы перед продом
@@ -63,6 +63,9 @@ public class SecurityConfig {
     }
 
     private void configureH2Console(HttpSecurity http) throws Exception {
+        if (h2ConsolePath.isBlank())
+            return;
+
         http
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(requests ->
