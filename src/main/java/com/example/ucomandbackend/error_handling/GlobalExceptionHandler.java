@@ -110,7 +110,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         addStackTrace(error, ex);
-        return createResponseEntity(body, headers, statusCode, request);
+        return createResponseEntity(error, headers, statusCode, request);
     }
 
     private void addStackTrace(ErrorResponseDto errorResponseDto, Throwable e) {
