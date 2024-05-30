@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.util;
+package com.example.ucomandbackend.config;
 
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.tags.TagRepository;

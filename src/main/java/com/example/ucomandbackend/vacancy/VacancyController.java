@@ -28,12 +28,6 @@ public class VacancyController {
         return vacancyService.addVacancyForCurrentUser(vacancyDto);
     }
 
-    @Operation(description = "Добавить вакансию для конкретного проекта")
-    @PostMapping("/forProject")
-    public VacancyDto addVacancyForProject(@RequestBody @Validated VacancyDto vacancyDto, @RequestParam Long projectId) {
-        return vacancyService.addVacancyForProject(vacancyDto, projectId);
-    }
-
     @GetMapping
     @Operation(description = "Если в tagIds пустой список, будут выбраны все резюме")
     public Collection<VacancyDto> getAllVacanciesByTagIds(
