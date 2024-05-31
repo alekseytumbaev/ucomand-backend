@@ -38,15 +38,16 @@ public class UserDto {
 
     private String cityOfResidence;
 
-    @Schema(description = "Уникальное. Нельзя поменять после создания пользователя")
+    @Schema(description = "Уникальное. Нельзя поменять и посомтреть после создания пользователя")
     @NotBlank(groups = OnCreate.class)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String telegram;
 
     @Schema(description = "Уникальное", example = "example@example.com")
     @Email
     private String email;
 
-    @Schema(description = "Уникальное. E.164 номер телефона.")
+    @Schema(description = "никальное. E.164 номер телефона.")
     @Pattern(regexp = "^\\+[1-9]\\d{1,14}$", message = "Номер телефона должен содержать только код страны и цифры")
     private String phone;
 

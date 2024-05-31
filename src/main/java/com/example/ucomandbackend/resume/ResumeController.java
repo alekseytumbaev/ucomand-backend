@@ -22,7 +22,7 @@ public class ResumeController {
 
     private final ResumeService resumeService;
 
-    @PostMapping
+    @PostMapping("/forCurrentUser")
     @Operation(description = "userDto передавать не нужно, оно будет игнорироваться")
     public ResumeDto addResumeForCurrentUser(@RequestBody @Validated ResumeDto resumeDto) {
         return resumeService.addResumeForCurrentUser(resumeDto);

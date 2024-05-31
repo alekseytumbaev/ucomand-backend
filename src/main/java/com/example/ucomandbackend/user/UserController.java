@@ -53,7 +53,7 @@ public class UserController {
     //TODO удалить
     @Operation(description = "Получить токен рут-админа")
     @SecurityRequirements
-    @GetMapping("/root/token")
+    @GetMapping("/rootToken")
     public TokenDto getRootToken() {
         return userService.getRootToken();
     }
