@@ -14,16 +14,16 @@ public class TagMapper {
                 tag.getId(),
                 tag.getName(),
                 null,
-                tag.getType(),
-                tag.getAvailabilityStatus()
+                tag.getType()
         );
     }
 
     public Tag toTag(TagDto tag) {
-        return new Tag(tag.getId(),
+        return new Tag(
+                tag.getId(),
                 tag.getName(),
-                tag.getType(),
-                tag.getAvailabilityStatus());
+                tag.getType()
+        );
     }
 
     public ResumeCompetenceLevelTag toResumeCompetenceLevelTag(Long id, Tag tag, Resume resume, CompetenceLevel competenceLevel) {
@@ -40,8 +40,7 @@ public class TagMapper {
                 resumeCompetenceLevelTag.getTag().getId(),
                 resumeCompetenceLevelTag.getTag().getName(),
                 resumeCompetenceLevelTag.getCompetenceLevel(),
-                resumeCompetenceLevelTag.getTag().getType(),
-                resumeCompetenceLevelTag.getTag().getAvailabilityStatus()
+                resumeCompetenceLevelTag.getTag().getType()
         );
     }
 }

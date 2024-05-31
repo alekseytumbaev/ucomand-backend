@@ -2,7 +2,6 @@ package com.example.ucomandbackend.config;
 
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.tags.TagRepository;
-import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserRepository;
@@ -37,22 +36,22 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         var professionTags = List.of(
-                new Tag(null, "DEFAULT", TagType.PROFESSION, TagAvailabilityStatus.UNAVAILABLE),
-                new Tag(null, "Администратор", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Разработчик", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Тестировщик", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Аналитик", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Менеджер", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Дизайнер", TagType.PROFESSION, TagAvailabilityStatus.AVAILABLE)
+                new Tag(null, "DEFAULT", TagType.PROFESSION),
+                new Tag(null, "Администратор", TagType.PROFESSION),
+                new Tag(null, "Разработчик", TagType.PROFESSION),
+                new Tag(null, "Тестировщик", TagType.PROFESSION),
+                new Tag(null, "Аналитик", TagType.PROFESSION),
+                new Tag(null, "Менеджер", TagType.PROFESSION),
+                new Tag(null, "Дизайнер", TagType.PROFESSION)
         );
 
         var skillTags = List.of(
-                new Tag(null, "Java", TagType.SKILL, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "JavaScript", TagType.SKILL, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Flutter", TagType.SKILL, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Figma", TagType.SKILL, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Intellij Idea", TagType.SKILL, TagAvailabilityStatus.AVAILABLE),
-                new Tag(null, "Git", TagType.SKILL, TagAvailabilityStatus.AVAILABLE)
+                new Tag(null, "Java", TagType.SKILL),
+                new Tag(null, "JavaScript", TagType.SKILL),
+                new Tag(null, "Flutter", TagType.SKILL),
+                new Tag(null, "Figma", TagType.SKILL),
+                new Tag(null, "Intellij Idea", TagType.SKILL),
+                new Tag(null, "Git", TagType.SKILL)
         );
 
         tagRepo.saveAll(professionTags);

@@ -1,7 +1,6 @@
 package com.example.ucomandbackend.resume;
 
 import com.example.ucomandbackend.resume.dto.ResumeDto;
-import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.tags.TagMapper;
 import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserMapper;

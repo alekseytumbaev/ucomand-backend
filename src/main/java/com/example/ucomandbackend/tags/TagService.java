@@ -1,11 +1,8 @@
 package com.example.ucomandbackend.tags;
 
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
-import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.tags.dto.TagType;
-import com.example.ucomandbackend.util.PageableDto;
-import com.example.ucomandbackend.util.PageableMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +21,7 @@ public class TagService {
     @Transactional
     public TagDto addTag(TagDto tagDto) {
         tagDto.setId(null);
+        tagDto.setName(tagDto.getName().strip());
         var tag = tagRepo.save(TagMapper.toTag(tagDto));
         return TagMapper.toTagDto(tag);
     }
@@ -38,6 +36,7 @@ public class TagService {
     @Transactional
     public TagDto updateTagById(Long tagId, TagDto tagDto) {
         tagDto.setId(tagId);
+        tagDto.setName(tagDto.getName().strip());
         var tag = tagRepo.save(TagMapper.toTag(tagDto));
         return TagMapper.toTagDto(tag);
     }
@@ -47,24 +46,21 @@ public class TagService {
      */
     @Transactional(readOnly = true)
     public TagDto getTagById(Long tagId) {
-        var tag = tagRepo.getTagById(tagId).orElseThrow(() -> new NotFoundException("Тег не найден"));
+        var tag = tagRepo.findById(tagId).orElseThrow(() -> new NotFoundException("Тег не найден"));
         return TagMapper.toTagDto(tag);
     }
 
+    /**
+     * @param types типы тегов, если пустой - будут выбраны все
+     */
     @Transactional(readOnly = true)
-    public List<TagDto> getAllTags(PageableDto pageableDto, List<TagType> types,
-                                   List<TagAvailabilityStatus> avStatuses) {
-        var tags = tagRepo.getAllByAvailabilityStatusInAndTypeIn(PageableMapper.toPageable(pageableDto), avStatuses, types);
+    public List<TagDto> getAllTags(List<TagType> types) {
+        var tags = types.isEmpty() ? tagRepo.findAll() : tagRepo.findAllByTypeIn(types);
         return tags.stream().map(TagMapper::toTagDto).toList();
     }
 
     @Transactional(readOnly = true)
     public List<Tag> getAllTagsByNames(List<String> tagNames) {
-        return tagRepo.getAllByNameIn(tagNames);
-    }
-
-    @Transactional(readOnly = true)
-    public Tag getTagByName(String name) {
-        return tagRepo.findByName(name).orElseThrow(() -> new NotFoundException("Тег не найден"));
+        return tagRepo.findAllByNameIn(tagNames);
     }
 }

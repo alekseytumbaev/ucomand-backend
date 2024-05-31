@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.tags;
 
-import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,9 +24,6 @@ public class Tag {
 
     @Enumerated(EnumType.STRING)
     private TagType type;
-
-    @Enumerated(EnumType.STRING)
-    private TagAvailabilityStatus availabilityStatus;
 
     @Override
     public final boolean equals(Object o) {

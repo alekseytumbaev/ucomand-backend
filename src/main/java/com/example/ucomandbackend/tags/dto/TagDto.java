@@ -19,12 +19,7 @@ public class TagDto {
     @Schema(description = "Уникальное", example = "Java")
     private String name;
 
-    //TODO потом убрать
     private CompetenceLevel competenceLevel;
 
     private TagType type;
-
-    @Schema(defaultValue = "VERIFICATION")
-    private TagAvailabilityStatus availabilityStatus = TagAvailabilityStatus.VERIFICATION;
-
 }

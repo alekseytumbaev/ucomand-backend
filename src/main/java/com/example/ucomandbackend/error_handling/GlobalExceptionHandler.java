@@ -39,6 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(e.getHttpStatus()).body(error);
     }
 
+    //TODO возвращать нормальное сообщение при ошибке уникальности
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(CONFLICT)
     public ErrorResponseDto onDataIntegrityViolationException(DataIntegrityViolationException e) {
