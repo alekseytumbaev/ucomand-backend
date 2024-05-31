@@ -2,7 +2,6 @@ package com.example.ucomandbackend.vacancy;
 
 import com.example.ucomandbackend.util.PageableMapper;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Min;
@@ -28,21 +27,13 @@ public class VacancyController {
         return vacancyService.addVacancyForCurrentUser(vacancyDto);
     }
 
-    @Operation(description = "Добавить вакансию для конкретного проекта")
-    @PostMapping("/forProject")
-    public VacancyDto addVacancyForProject(@RequestBody @Validated VacancyDto vacancyDto, @RequestParam Long projectId) {
-        return vacancyService.addVacancyForProject(vacancyDto, projectId);
-    }
-
     @GetMapping
     @Operation(description = "Если в tagIds пустой список, будут выбраны все резюме")
     public Collection<VacancyDto> getAllVacanciesByTagIds(
             @RequestParam(defaultValue = "0")
-            @Parameter(description = "min: 0")
             @Validated @Min(0) Integer page,
 
             @RequestParam(defaultValue = "10")
-            @Parameter(description = "min: 1")
             @Validated @Min(1) Integer size,
 
             @RequestParam(defaultValue = "") List<Long> tagIds) {

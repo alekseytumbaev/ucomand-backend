@@ -4,7 +4,6 @@ import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.util.PageableMapper;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Min;
@@ -36,11 +35,9 @@ public class TagController {
 
     @GetMapping
     public Collection<TagDto> getAllTags(@RequestParam(required = false, defaultValue = "0")
-                                         @Parameter(description = "min: 0")
                                          @Validated @Min(0) Integer page,
 
                                          @RequestParam(required = false, defaultValue = "10")
-                                         @Parameter(description = "min: 1")
                                          @Validated @Min(1) Integer size,
 
                                          @RequestParam(required = false, defaultValue = "PROFESSION,SKILL,MISC")

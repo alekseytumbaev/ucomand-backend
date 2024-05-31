@@ -20,7 +20,7 @@ public class ErrorResponseDto {
 
     private String exception;
 
-    private String stackTrace;
-
     private final Instant timestamp = Instant.now();
+
+    private String stackTrace;
 }

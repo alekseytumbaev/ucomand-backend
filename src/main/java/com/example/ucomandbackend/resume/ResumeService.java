@@ -1,6 +1,7 @@
 package com.example.ucomandbackend.resume;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
+import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.resume.dto.ResumeDto;
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.tags.TagService;
@@ -30,8 +31,8 @@ public class ResumeService {
     private final TagService tagService;
 
     /**
-     * @throws com.example.ucomandbackend.error_handling.NotFoundException       пользователь не найден
-     * @throws com.example.ucomandbackend.error_handling.CorruptedTokenException
+     * @throws NotFoundException       пользователь не найден
+     * @throws CorruptedTokenException
      */
     @Transactional
     public ResumeDto addResumeForCurrentUser(ResumeDto resumeDto) {
@@ -48,7 +49,7 @@ public class ResumeService {
     }
 
     /**
-     * @throws com.example.ucomandbackend.error_handling.CorruptedTokenException
+     * @throws CorruptedTokenException
      */
     @Transactional(readOnly = true)
     public Collection<ResumeDto> getAllResumesOfCurrentUser() {

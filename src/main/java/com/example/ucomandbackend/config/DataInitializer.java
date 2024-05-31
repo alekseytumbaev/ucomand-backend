@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.util;
+package com.example.ucomandbackend.config;
 
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.tags.TagRepository;
@@ -10,22 +10,20 @@ import com.example.ucomandbackend.user.dto.Gender;
 import com.example.ucomandbackend.user.dto.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
 
-    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepo;
     private final TagRepository tagRepo;
 
+    //TODO придумать, что-то типо databasechangelog для инициализации данных
     @Override
     @Transactional
     public void run(String... args) {
@@ -63,15 +61,14 @@ public class DataInitializer implements CommandLineRunner {
 
 
     private void addRoot() {
-        if (userRepo.existsByTelegram("@rootadmin")) {
+        if (userRepo.existsByTelegram("rootadmin")) {
             return;
         }
 
         var root = new User(
                 1L,
-                "root",
-                null,
-                Set.of(tagRepo.getByName("Администратор").get()),
+                "Рут",
+                "Рут",
                 Gender.MALE,
                 21,
                 null,
@@ -79,10 +76,10 @@ public class DataInitializer implements CommandLineRunner {
                 null,
                 OffsetDateTime.now(),
                 null,
-                "@rootadmin",
+                "rootadmin", //TODO поместить в пропертис
                 null,
                 null,
-                passwordEncoder.encode("Root1234!"),
+                null,
                 UserRole.ROOT
         );
         userRepo.save(root);

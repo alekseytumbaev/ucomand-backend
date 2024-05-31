@@ -1,7 +1,6 @@
 package com.example.ucomandbackend.vacancy;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
-import com.example.ucomandbackend.project.ProjectRepository;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.tags.TagService;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.UserService;
@@ -24,7 +23,6 @@ public class VacancyService {
     private final VacancyRepository vacancyRepo;
     private final UserService userService;
     private final TagService tagService;
-    private final ProjectRepository projectRepo;
 
     public Collection<VacancyDto> getAllVacanciesByTagIds(PageableDto pageableDto, List<Long> tagIds) {
         Page<Vacancy> vacancies;
@@ -47,6 +45,7 @@ public class VacancyService {
                 vacancyRepo.findById(vacancyId).orElseThrow(() -> new NotFoundException("Вакансия не найдена")));
     }
 
+    //TODO только создатель, либо админ
     public void deleteVacancyById(Long vacancyId) {
         vacancyRepo.deleteById(vacancyId);
     }
@@ -54,15 +53,8 @@ public class VacancyService {
     public VacancyDto addVacancyForCurrentUser(VacancyDto vacancyDto) {
         var ownerId = AuthUtils.extractUserIdFromJwt();
         var owner = userService.getUserById(ownerId);
-        var project = projectRepo.findById(vacancyDto.getProjectId()).orElse(null);
         var tags = tagService.getAllTagsByNames(vacancyDto.getTags().stream().map(TagDto::getName).toList());
-        var profession = owner.getTags() != null && !owner.getTags().isEmpty() ? owner.getTags().iterator().next() : null;
-        var vacancy = VacancyMapper.toVacancy(vacancyDto, owner, project, profession, new HashSet<>(tags));
+        var vacancy = VacancyMapper.toVacancy(vacancyDto, owner, new HashSet<>(tags));
         return VacancyMapper.toVacancyDto(vacancyRepo.save(vacancy));
-    }
-
-    public VacancyDto addVacancyForProject(VacancyDto vacancyDto, Long projectId) {
-        vacancyDto.setProjectId(projectId);
-        return addVacancyForCurrentUser(vacancyDto);
     }
 }

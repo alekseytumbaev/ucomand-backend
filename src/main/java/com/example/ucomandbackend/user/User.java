@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.user.dto.Gender;
 import com.example.ucomandbackend.user.dto.UserRole;
 import jakarta.persistence.*;
@@ -14,7 +13,6 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,13 +30,6 @@ public class User implements UserDetails {
     private String firstName;
 
     private String lastName;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    @ToString.Exclude
-    private Set<Tag> tags;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;

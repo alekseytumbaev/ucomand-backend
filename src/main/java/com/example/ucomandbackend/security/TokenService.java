@@ -18,12 +18,12 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 public class TokenService {
 
     private static final String TOKEN_TYPE = "Bearer";
-    public static final int TOKEN_LIFETIME_MIN = 999999999;
+    public static final int TOKEN_LIFETIME_MIN = 999999999; //TODO перенести в проперти
 
     private final JwtEncoder encoder;
 
     public TokenDto generateToken(User user) {
-        String role = user.getAuthorities().stream()
+        String authorities = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
 
@@ -33,7 +33,7 @@ public class TokenService {
                 .issuedAt(now)
                 .expiresAt(now.plus(TOKEN_LIFETIME_MIN, MINUTES))
                 .subject(user.getId().toString())
-                .claim("scope", role)
+                .claim("scope", authorities)
                 .build();
 
         String token = encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

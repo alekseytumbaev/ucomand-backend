@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.error_handling;
+package com.example.ucomandbackend.error_handling.common_exception;
 
 public class NotFoundException extends AbstractOpenApiException {
     public static final String CODE = "404";

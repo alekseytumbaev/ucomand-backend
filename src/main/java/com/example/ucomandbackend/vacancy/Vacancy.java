@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.vacancy;
 
-import com.example.ucomandbackend.project.Project;
 import com.example.ucomandbackend.resume.dto.MotivationType;
 import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.user.User;
@@ -14,7 +13,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "projects")
+@Table(name = "vacancies")
 @Entity
 @Getter
 @Setter
@@ -29,14 +28,6 @@ public class Vacancy {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @ManyToOne
-    @JoinColumn(name = "profession_id")
-    private Tag profession;
 
     @ManyToMany
     @JoinTable(name = "vacancies_tags",

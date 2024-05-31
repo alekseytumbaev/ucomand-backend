@@ -19,12 +19,7 @@ import java.util.List;
 public class VacancyDto {
     private Long id;
 
-    private Long projectId;
-
     private UserDto owner;
-
-    @Valid
-    private TagDto profession;
 
     @Valid
     private List<TagDto> tags;

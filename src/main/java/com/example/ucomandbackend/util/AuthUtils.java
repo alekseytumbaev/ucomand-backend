@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.util;
 
-import com.example.ucomandbackend.error_handling.CorruptedTokenException;
+import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

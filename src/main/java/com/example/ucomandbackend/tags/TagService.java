@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.tags;
 
-import com.example.ucomandbackend.error_handling.NotFoundException;
+import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.tags.dto.TagAvailabilityStatus;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.tags.dto.TagType;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -62,11 +61,6 @@ public class TagService {
     @Transactional(readOnly = true)
     public List<Tag> getAllTagsByNames(List<String> tagNames) {
         return tagRepo.getAllByNameIn(tagNames);
-    }
-
-    @Transactional(readOnly = true)
-    public Set<Tag> getTagsByResumeId(Long resumeId) {
-        return tagRepo.getTagsByResumeId(resumeId);
     }
 
     @Transactional(readOnly = true)

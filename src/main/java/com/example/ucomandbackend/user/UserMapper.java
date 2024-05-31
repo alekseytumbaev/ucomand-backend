@@ -1,13 +1,7 @@
 package com.example.ucomandbackend.user;
 
-import com.example.ucomandbackend.tags.Tag;
-import com.example.ucomandbackend.tags.TagMapper;
 import com.example.ucomandbackend.user.dto.UserDto;
-import com.example.ucomandbackend.user.dto.UserRole;
 import lombok.experimental.UtilityClass;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @UtilityClass
 public class UserMapper {
@@ -17,7 +11,6 @@ public class UserMapper {
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getTags().stream().map(TagMapper::toTagDto).collect(Collectors.toSet()),
                 user.getGender(),
                 user.getAge(),
                 user.getFreeLink(),
@@ -33,12 +26,11 @@ public class UserMapper {
         );
     }
 
-    public User toUser(UserDto userDto, Set<Tag> tags, String password, UserRole role) {
+    public User toUser(UserDto userDto, String password) {
         return new User(
                 userDto.getId(),
                 userDto.getFirstName(),
                 userDto.getLastName(),
-                tags,
                 userDto.getGender(),
                 userDto.getAge(),
                 userDto.getFreeLink(),
@@ -50,7 +42,7 @@ public class UserMapper {
                 userDto.getPhone(),
                 userDto.getEmail(),
                 password,
-                role
+                userDto.getRole()
         );
     }
 }
