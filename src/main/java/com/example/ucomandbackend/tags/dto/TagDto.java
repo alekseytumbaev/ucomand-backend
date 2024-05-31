@@ -20,11 +20,9 @@ public class TagDto {
     private String name;
 
     //TODO потом убрать
-    @Schema(defaultValue = "NONE")
-    private CompetenceLevel competenceLevel = CompetenceLevel.JUNIOR;
+    private CompetenceLevel competenceLevel;
 
-    @Schema(defaultValue = "MISC")
-    private TagType type = TagType.MISC;
+    private TagType type;
 
     @Schema(defaultValue = "VERIFICATION")
     private TagAvailabilityStatus availabilityStatus = TagAvailabilityStatus.VERIFICATION;

@@ -1,7 +1,6 @@
 package com.example.ucomandbackend.resume;
 
 import com.example.ucomandbackend.resume.dto.MotivationType;
-import com.example.ucomandbackend.tags.Tag;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +17,6 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 public class Resume {
 
     @Id
@@ -49,7 +47,7 @@ public class Resume {
             joinColumns = @JoinColumn(name = "resume_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     @ToString.Exclude
-    private Set<Tag> tags;
+    private Set<ResumeCompetenceLevelTag> tags;
 
     @Override
     public final boolean equals(Object o) {

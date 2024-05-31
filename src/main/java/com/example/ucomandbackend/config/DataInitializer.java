@@ -23,7 +23,7 @@ public class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepo;
     private final TagRepository tagRepo;
 
-    //TODO придумать, что-то типо databasechangelog для инициализации данных
+    //TODO придумать как нормально иницииализировать данные
     @Override
     @Transactional
     public void run(String... args) {

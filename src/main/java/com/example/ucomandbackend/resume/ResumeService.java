@@ -43,9 +43,9 @@ public class ResumeService {
         Set<Tag> tags = new HashSet<>(
                 tagService.getAllTagsByNames(resumeDto.getTags().stream().map(TagDto::getName).toList()));
 
-
-        var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, tags));
-        return ResumeMapper.toResumeDto(resume);
+        return null;// TODO
+//        var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, tags));
+//        return ResumeMapper.toResumeDto(resume);
     }
 
     /**
@@ -60,7 +60,8 @@ public class ResumeService {
     @Transactional(readOnly = true)
     public List<ResumeDto> getAllResumesByUserId(Long userId) {
         var resumes = resumeRepo.findAllByUser_Id(userId);
-        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
+        return null; //TODO
+//        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
     }
 
     /**
@@ -69,7 +70,8 @@ public class ResumeService {
     @Transactional(readOnly = true)
     public ResumeDto getResumeById(Long resumeId) {
         var resume = resumeRepo.findById(resumeId).orElseThrow(() -> new NotFoundException("Резюме не найдено"));
-        return ResumeMapper.toResumeDto(resume);
+        return null; //TODO
+//        return ResumeMapper.toResumeDto(resume);
     }
 
     /**
@@ -83,7 +85,8 @@ public class ResumeService {
         } else {
             resumes = resumeRepo.findAll(PageableMapper.toPageable(pageableDto));
         }
-        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
+        return null; //TODO
+//        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
     }
 
     @Transactional

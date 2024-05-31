@@ -13,7 +13,7 @@ public class TagMapper {
         return new TagDto(
                 tag.getId(),
                 tag.getName(),
-                CompetenceLevel.NONE,
+                null,
                 tag.getType(),
                 tag.getAvailabilityStatus()
         );

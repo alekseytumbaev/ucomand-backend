@@ -40,9 +40,11 @@ public class TagController {
                                          @RequestParam(required = false, defaultValue = "10")
                                          @Validated @Min(1) Integer size,
 
-                                         @RequestParam(required = false, defaultValue = "PROFESSION,SKILL,MISC")
+                                         //TODO defaultVale в константу в енаме
+                                         @RequestParam(required = false, defaultValue = "PROFESSION,SKILL")
                                          List<TagType> types,
 
+                                         //TODO перенести deafaultValue в константу в енаме и в похожих местах тоже
                                          @RequestParam(required = false, defaultValue = "AVAILABLE,VERIFICATION,UNAVAILABLE")
                                          List<TagAvailabilityStatus> avStatuses
     ) {
