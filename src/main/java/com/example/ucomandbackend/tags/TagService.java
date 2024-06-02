@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ public class TagService {
 
     private final TagRepository tagRepo;
 
+    //TODO сравнивать имя игнор-кейсом
     /**
      * @throws org.springframework.dao.DataIntegrityViolationException не уникальное название тега
      */
@@ -30,6 +32,7 @@ public class TagService {
         tagRepo.deleteById(tagId);
     }
 
+    //TODO сравнивать имя игнор-кейсом
     /**
      * @throws org.springframework.dao.DataIntegrityViolationException не уникальное название тега
      */
@@ -57,6 +60,11 @@ public class TagService {
     public List<TagDto> getAllTags(List<TagType> types) {
         var tags = types.isEmpty() ? tagRepo.findAll() : tagRepo.findAllByTypeIn(types);
         return tags.stream().map(TagMapper::toTagDto).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Tag> getAllTagsByIds(Set<Long> ids) {
+        return tagRepo.findAllById(ids);
     }
 
     @Transactional(readOnly = true)

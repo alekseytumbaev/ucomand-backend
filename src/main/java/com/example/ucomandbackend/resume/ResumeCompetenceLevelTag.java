@@ -24,11 +24,12 @@ public class ResumeCompetenceLevelTag {
     @Enumerated(EnumType.STRING)
     private CompetenceLevel competenceLevel;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
+    @ToString.Exclude
     private Resume resume;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
 

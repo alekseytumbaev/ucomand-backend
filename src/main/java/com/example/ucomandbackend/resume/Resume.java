@@ -1,14 +1,18 @@
 package com.example.ucomandbackend.resume;
 
 import com.example.ucomandbackend.resume.dto.MotivationType;
+import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
+import org.springframework.lang.Nullable;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +27,7 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //TODO добавить имя фамилию
+    //TODO уровень видимости
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,12 +46,38 @@ public class Resume {
 
     private OffsetDateTime creationDate;
 
-    @ManyToMany
-    @JoinTable(name = "resumes_tags",
-            joinColumns = @JoinColumn(name = "resume_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "resume_id")
     @ToString.Exclude
-    private Set<ResumeCompetenceLevelTag> tags;
+    private Set<ResumeCompetenceLevelTag> tags = new HashSet<>();
+
+    public boolean addTag(ResumeCompetenceLevelTag tag) {
+        boolean isModified = tags.add(tag);
+        tag.setResume(this);
+        return isModified;
+    }
+
+    public boolean addTags(Set<ResumeCompetenceLevelTag> tags) {
+        boolean isModified = this.tags.addAll(tags);
+        for (ResumeCompetenceLevelTag tag : tags) {
+            tag.setResume(this);
+        }
+        return isModified;
+    }
+
+    @Nullable
+    public ResumeCompetenceLevelTag getProfession() {
+        return tags.stream()
+                .filter(tag -> tag.getTag().getType() == TagType.PROFESSION)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Set<ResumeCompetenceLevelTag> getSkills() {
+        return tags.stream()
+                .filter(tag -> tag.getTag().getType() == TagType.SKILL)
+                .collect(Collectors.toSet());
+    }
 
     @Override
     public final boolean equals(Object o) {

@@ -9,13 +9,17 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TagMapper {
 
-    public TagDto toTagDto(Tag tag) {
+    public TagDto toTagDto(Tag tag, CompetenceLevel competenceLevel) {
         return new TagDto(
                 tag.getId(),
                 tag.getName(),
-                null,
+                competenceLevel,
                 tag.getType()
         );
+    }
+
+    public TagDto toTagDto(Tag tag) {
+        return toTagDto(tag, null);
     }
 
     public Tag toTag(TagDto tag) {
@@ -26,21 +30,15 @@ public class TagMapper {
         );
     }
 
-    public ResumeCompetenceLevelTag toResumeCompetenceLevelTag(Long id, Tag tag, Resume resume, CompetenceLevel competenceLevel) {
+    public ResumeCompetenceLevelTag toResumeCompetenceLevelTag(Long id,
+                                                               Tag tag,
+                                                               Resume resume,
+                                                               CompetenceLevel competenceLevel) {
         return new ResumeCompetenceLevelTag(
                 id,
                 competenceLevel,
                 resume,
                 tag
-        );
-    }
-
-    public TagDto toTagDto(ResumeCompetenceLevelTag resumeCompetenceLevelTag) {
-        return new TagDto(
-                resumeCompetenceLevelTag.getTag().getId(),
-                resumeCompetenceLevelTag.getTag().getName(),
-                resumeCompetenceLevelTag.getCompetenceLevel(),
-                resumeCompetenceLevelTag.getTag().getType()
         );
     }
 }

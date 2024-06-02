@@ -28,11 +28,18 @@ public class ResumeController {
         return resumeService.addResumeForCurrentUser(resumeDto);
     }
 
+    @PutMapping("/ofCurrentUser/{resumeId}")
+    public ResumeDto updateResumeOfCurrentUser(@PathVariable Long resumeId,
+                                               @RequestBody @Validated ResumeDto resumeDto) {
+        return resumeService.updateResumeOfCurrentUser(resumeId, resumeDto);
+    }
+
     @GetMapping("/ofCurrentUser")
     public Collection<ResumeDto> getAllResumesOfCurrentUser() {
         return resumeService.getAllResumesOfCurrentUser();
     }
 
+    //TODO видимость?
     @GetMapping("/byUserId")
     public Collection<ResumeDto> getAllResumesByUserId(@RequestParam Long userId) {
         return resumeService.getAllResumesByUserId(userId);
@@ -45,16 +52,25 @@ public class ResumeController {
 
     @GetMapping
     @Operation(description = "Если в tagIds пустой список, будут выбраны все резюме")
-    public Collection<ResumeDto> getAllResumesByTagIds(@RequestParam(defaultValue = "0")
-                                                       @Validated @Min(0) Integer page,
+    public Collection<ResumeDto> getAllResumes(@RequestParam(defaultValue = "0")
+                                               @Validated @Min(0) Integer page,
 
-                                                       @RequestParam(defaultValue = "10")
-                                                       @Validated @Min(1) Integer size,
+                                               @RequestParam(defaultValue = "10")
+                                               @Validated @Min(1) Integer size,
 
-                                                       @RequestParam(defaultValue = "") List<Long> tagIds) {
-        return resumeService.getAllResumesByTagIds(PageableMapper.toPageableDto(page, size), tagIds);
+                                               @RequestParam(defaultValue = "") List<Long> tagIds) {
+        return resumeService.getAllResumes(PageableMapper.toPageableDto(page, size), tagIds);
     }
 
+    //TODO только админ
+    @PutMapping("/{resumeId}")
+    public Collection<ResumeDto> updateResumeById(@PathVariable Long resumeId,
+                                                  @RequestBody @Validated ResumeDto resumeDto) {
+        return null;
+//        return resumeService.updateResumeById(resumeId, resumeDto);
+    }
+
+    //TODO только свое или админ
     @DeleteMapping("/{resumeId}")
     public void deleteResumeById(@PathVariable Long resumeId) {
         resumeService.deleteResumeById(resumeId);

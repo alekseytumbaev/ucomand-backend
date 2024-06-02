@@ -3,7 +3,7 @@ package com.example.ucomandbackend.resume;
 import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.resume.dto.ResumeDto;
-import com.example.ucomandbackend.tags.Tag;
+import com.example.ucomandbackend.tags.TagMapper;
 import com.example.ucomandbackend.tags.TagService;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.UserService;
@@ -20,15 +20,18 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ResumeService {
 
     private final ResumeRepository resumeRepo;
+    private final ResumeCompetenceLevelTagRepository competenceLevelTagRepo;
     private final UserService userService;
     private final TagService tagService;
+
 
     /**
      * @throws NotFoundException       пользователь не найден
@@ -38,14 +41,55 @@ public class ResumeService {
     public ResumeDto addResumeForCurrentUser(ResumeDto resumeDto) {
         resumeDto.setId(null);
         resumeDto.setCreationDate(OffsetDateTime.now());
-        long userId = AuthUtils.extractUserIdFromJwt();
-        var user = userService.getUserById(userId);
-        Set<Tag> tags = new HashSet<>(
-                tagService.getAllTagsByNames(resumeDto.getTags().stream().map(TagDto::getName).toList()));
 
-        return null;// TODO
-//        var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, tags));
-//        return ResumeMapper.toResumeDto(resume);
+        long userId = AuthUtils.extractUserIdFromJwt();
+        return saveResumeOfUser(userId, resumeDto);
+    }
+
+    /**
+     * @throws NotFoundException       пользователь или резюме не найдено
+     * @throws CorruptedTokenException
+     */
+    @Transactional
+    public ResumeDto updateResumeOfCurrentUser(Long resumeId, ResumeDto resumeDto) {
+        if (!resumeRepo.existsById(resumeId)) {
+            throw new NotFoundException("Резюме не найдено");
+        }
+        competenceLevelTagRepo.deleteByResume_Id(resumeId);
+        resumeDto.setId(resumeId);
+        resumeDto.setCreationDate(resumeRepo.findCreationDateById(resumeId));
+
+        long userId = AuthUtils.extractUserIdFromJwt();
+        return saveResumeOfUser(userId, resumeDto);
+    }
+
+    /**
+     * @throws NotFoundException пользователь не найден
+     */
+    @Transactional
+    public ResumeDto saveResumeOfUser(Long userId, ResumeDto resumeDto) {
+        var user = userService.getUserById(userId);
+
+        var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, new HashSet<>()));
+
+        Map<Long, TagDto> idsToTagDtos = getTagsFromResumeDto(resumeDto);
+        var tags = tagService.getAllTagsByIds(idsToTagDtos.keySet());
+
+        var competenceLevelTags = tags.stream()
+                .map(tag -> TagMapper.toResumeCompetenceLevelTag(
+                        null, tag, resume, idsToTagDtos.get(tag.getId()).getCompetenceLevel()))
+                .collect(Collectors.toSet());
+
+        competenceLevelTagRepo.saveAll(competenceLevelTags);
+        resume.setTags(competenceLevelTags);
+
+        return ResumeMapper.toResumeDto(resumeRepo.save(resume));
+    }
+
+    private Map<Long, TagDto> getTagsFromResumeDto(ResumeDto resumeDto) {
+        Map<Long, TagDto> idsToTags = resumeDto.getSkills().stream().collect(Collectors.toMap(TagDto::getId, it -> it));
+        idsToTags.put(resumeDto.getProfession().getId(), resumeDto.getProfession());
+        return idsToTags;
     }
 
     /**
@@ -60,8 +104,7 @@ public class ResumeService {
     @Transactional(readOnly = true)
     public List<ResumeDto> getAllResumesByUserId(Long userId) {
         var resumes = resumeRepo.findAllByUser_Id(userId);
-        return null; //TODO
-//        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
+        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
     }
 
     /**
@@ -78,7 +121,7 @@ public class ResumeService {
      * Если tagIds пустой, возвращаются все резюме
      */
     @Transactional(readOnly = true)
-    public List<ResumeDto> getAllResumesByTagIds(PageableDto pageableDto, List<Long> tagIds) {
+    public List<ResumeDto> getAllResumes(PageableDto pageableDto, List<Long> tagIds) {
         Page<Resume> resumes;
         if (CollectionUtils.notEmpty(tagIds)) {
             resumes = resumeRepo.findAllByTagIdsIn(PageableMapper.toPageable(pageableDto), tagIds);

@@ -24,6 +24,13 @@ public class ResumeDto {
     @Valid
     private UserDto userDto;
 
+    @Valid
+    private TagDto profession;
+
+    @Valid
+    @NotNull
+    private Set<TagDto> skills;
+
     @NotNull
     private MotivationType motivation;
 
@@ -40,8 +47,4 @@ public class ResumeDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime creationDate;
-
-    @Valid
-    @NotNull
-    private Set<TagDto> tags;
 }

@@ -6,29 +6,31 @@ import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserMapper;
 import lombok.experimental.UtilityClass;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class ResumeMapper {
 
-    public ResumeDto toResumeDto(Resume resume, List<ResumeCompetenceLevelTag> resumeLevelTags) {
-
+    public ResumeDto toResumeDto(Resume resume) {
+        var profession = resume.getProfession();
         return new ResumeDto(
                 resume.getId(),
                 UserMapper.toUserDtoWithoutPassword(resume.getUser()),
+                profession == null ? null : TagMapper.toTagDto(profession.getTag(), profession.getCompetenceLevel()),
+                resume.getSkills().stream()
+                        .map(it -> TagMapper.toTagDto(it.getTag(), it.getCompetenceLevel()))
+                        .collect(Collectors.toSet()),
                 resume.getMotivation(),
                 resume.getHoursPerWeek(),
                 resume.getFreeLink(),
                 resume.getOwnLink(),
                 resume.getDetails(),
-                resume.getCreationDate(),
-                resumeLevelTags.stream().map(TagMapper::toTagDto).collect(Collectors.toSet())
+                resume.getCreationDate()
         );
     }
 
-    public Resume toResume(ResumeDto resumeDto, User user, Set<ResumeCompetenceLevelTag> resumeLevelTags) {
+    public Resume toResume(ResumeDto resumeDto, User user, Set<ResumeCompetenceLevelTag> competenceLevelTags) {
         return new Resume(
                 resumeDto.getId(),
                 user,
@@ -38,7 +40,7 @@ public class ResumeMapper {
                 resumeDto.getOwnLink(),
                 resumeDto.getDetails(),
                 resumeDto.getCreationDate(),
-                resumeLevelTags
+                competenceLevelTags
         );
     }
 }
