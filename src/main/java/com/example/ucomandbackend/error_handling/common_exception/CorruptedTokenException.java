@@ -7,16 +7,4 @@ public class CorruptedTokenException extends AbstractOpenApiException {
     public CorruptedTokenException(String message) {
         super(CODE, message);
     }
-
-    public CorruptedTokenException(String httpStatus, String message, String userMessage) {
-        super(httpStatus, message, userMessage);
-    }
-
-    public CorruptedTokenException(String httpStatus, String message, Throwable cause) {
-        super(httpStatus, message, cause);
-    }
-
-    public CorruptedTokenException(String httpStatus, String message, String userMessage, Throwable cause) {
-        super(httpStatus, message, userMessage, cause);
-    }
 }

@@ -10,16 +10,4 @@ public class ResumeDoesntBelongToUserException extends AbstractOpenApiException 
     public ResumeDoesntBelongToUserException(String message) {
         super(CODE, message);
     }
-
-    public ResumeDoesntBelongToUserException(String message, String userMessage) {
-        super(CODE, message, userMessage);
-    }
-
-    public ResumeDoesntBelongToUserException(String message, Throwable cause) {
-        super(CODE, message, cause);
-    }
-
-    public ResumeDoesntBelongToUserException(String message, String userMessage, Throwable cause) {
-        super(CODE, message, userMessage, cause);
-    }
 }

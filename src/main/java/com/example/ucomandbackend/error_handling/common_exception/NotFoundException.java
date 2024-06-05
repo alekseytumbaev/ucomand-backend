@@ -7,16 +7,4 @@ public class NotFoundException extends AbstractOpenApiException {
     public NotFoundException(String message) {
         super(CODE, message);
     }
-
-    public NotFoundException(String message, String userMessage) {
-        super(CODE, message, userMessage);
-    }
-
-    public NotFoundException(String message, Throwable cause) {
-        super(CODE, message, cause);
-    }
-
-    public NotFoundException(String message, String userMessage, Throwable cause) {
-        super(CODE, message, userMessage, cause);
-    }
 }
