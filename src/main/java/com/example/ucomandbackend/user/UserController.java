@@ -45,7 +45,6 @@ public class UserController {
         return userService.getAllUsers(PageableMapper.toPageableDto(page, size));
     }
 
-    //TODO поменять {userId} на /byId, чтобы было типо rpc, но это в последнюю очередь!!!
     //TODO только админ и сам себя
     @DeleteMapping("/{userId}")
     public void deleteUserById(@PathVariable Long userId) {

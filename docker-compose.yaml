@@ -15,7 +15,6 @@ services:
 
   ucomand-database:
     image: postgres:15.1-alpine
-    restart: always
     ports:
       - "5432:5432"
     volumes:

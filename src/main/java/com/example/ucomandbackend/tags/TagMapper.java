@@ -1,7 +1,7 @@
 package com.example.ucomandbackend.tags;
 
-import com.example.ucomandbackend.resume.Resume;
-import com.example.ucomandbackend.resume.ResumeCompetenceLevelTag;
+import com.example.ucomandbackend.ad.Ad;
+import com.example.ucomandbackend.ad.AdCompetenceLevelTag;
 import com.example.ucomandbackend.tags.dto.CompetenceLevel;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import lombok.experimental.UtilityClass;
@@ -30,14 +30,14 @@ public class TagMapper {
         );
     }
 
-    public ResumeCompetenceLevelTag toResumeCompetenceLevelTag(Long id,
-                                                               Tag tag,
-                                                               Resume resume,
-                                                               CompetenceLevel competenceLevel) {
-        return new ResumeCompetenceLevelTag(
+    public AdCompetenceLevelTag toAdCompetenceLevelTag(Long id,
+                                                       Tag tag,
+                                                       Ad ad,
+                                                       CompetenceLevel competenceLevel) {
+        return new AdCompetenceLevelTag(
                 id,
                 competenceLevel,
-                resume,
+                ad,
                 tag
         );
     }

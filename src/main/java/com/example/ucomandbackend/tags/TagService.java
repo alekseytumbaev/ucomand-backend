@@ -66,9 +66,4 @@ public class TagService {
     public List<Tag> getAllTagsByIds(Set<Long> ids) {
         return tagRepo.findAllById(ids);
     }
-
-    @Transactional(readOnly = true)
-    public List<Tag> getAllTagsByNames(List<String> tagNames) {
-        return tagRepo.findAllByNameIn(tagNames);
-    }
 }

@@ -1,41 +1,37 @@
-package com.example.ucomandbackend.vacancy;
+package com.example.ucomandbackend.ad;
 
-import com.example.ucomandbackend.resume.dto.MotivationType;
-import com.example.ucomandbackend.resume.dto.VisibilityLevel;
-import com.example.ucomandbackend.user.User;
+import com.example.ucomandbackend.tags.Tag;
+import com.example.ucomandbackend.tags.dto.CompetenceLevel;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "vacancies")
+@Table(name = "ad_competence_level_tags")
 @Entity
 @Getter
 @Setter
 @ToString
-public class Vacancy {
-
+public class AdCompetenceLevelTag {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
-
     @Enumerated(EnumType.STRING)
-    private MotivationType motivation;
+    private CompetenceLevel competenceLevel;
 
-    private String details;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ad_id")
+    @ToString.Exclude
+    private Ad ad;
 
-    private VisibilityLevel visibility;
-
-    private OffsetDateTime creationDate;
+    @ManyToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 
     @Override
     public final boolean equals(Object o) {
@@ -44,8 +40,8 @@ public class Vacancy {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Vacancy vacancy = (Vacancy) o;
-        return getId() != null && Objects.equals(getId(), vacancy.getId());
+        AdCompetenceLevelTag that = (AdCompetenceLevelTag) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
     }
 
     @Override

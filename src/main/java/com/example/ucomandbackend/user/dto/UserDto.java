@@ -43,23 +43,10 @@ public class UserDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String telegram;
 
-    @Schema(description = "Уникальное", example = "example@example.com")
-    @Email
     private String email;
 
-    @Schema(description = "никальное. E.164 номер телефона.")
-    @Pattern(regexp = "^\\+[1-9]\\d{1,14}$", message = "Номер телефона должен содержать только код страны и цифры")
     private String phone;
 
-    @Schema(description = "При обновлении указывать пароль не обязательно. " +
-            "Пароль должен содержать от 8 до 32 символов, " +
-            "как минимум одну английскую букву, одну цифру и один специальный символ")
-    @Size(min = 8, max = 32)
-    @Pattern(
-            regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?^&])[A-Za-z\\d@$!%*#?^&]{3,}$",
-            message = "Пароль должен содержать от 8 до 32 символов, " +
-                    "как минимум одну английскую букву, одну цифру и один специальный символ")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)

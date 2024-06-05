@@ -27,15 +27,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    compileOnly("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok") //TODO захардкодить версю перед продом
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.h2database:h2") //TODO захардкодить версю перед продом
+    runtimeOnly("org.postgresql:postgresql") //TODO захардкодить версю перед продом
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok") //TODO захардкодить версю перед продом
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher") //TODO захардкодить версю перед продом?
 }
 
 tasks.withType<Test> {

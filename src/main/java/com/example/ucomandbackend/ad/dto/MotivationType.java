@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.resume.dto;
+package com.example.ucomandbackend.ad.dto;
 
 public enum MotivationType {
     PAYMENT,

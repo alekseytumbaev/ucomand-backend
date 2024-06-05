@@ -36,22 +36,21 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         var professionTags = List.of(
-                new Tag(1L, "DEFAULT", TagType.PROFESSION),
-                new Tag(2L, "Администратор", TagType.PROFESSION),
-                new Tag(3L, "Разработчик", TagType.PROFESSION),
-                new Tag(4L, "Тестировщик", TagType.PROFESSION),
-                new Tag(5L, "Аналитик", TagType.PROFESSION),
-                new Tag(6L, "Менеджер", TagType.PROFESSION),
-                new Tag(7L, "Дизайнер", TagType.PROFESSION)
+                new Tag(1L, "Администратор", TagType.PROFESSION),
+                new Tag(2L, "Разработчик", TagType.PROFESSION),
+                new Tag(3L, "Тестировщик", TagType.PROFESSION),
+                new Tag(4L, "Аналитик", TagType.PROFESSION),
+                new Tag(5L, "Менеджер", TagType.PROFESSION),
+                new Tag(6L, "Дизайнер", TagType.PROFESSION)
         );
 
         var skillTags = List.of(
-                new Tag(8L, "Java", TagType.SKILL),
-                new Tag(9L, "JavaScript", TagType.SKILL),
-                new Tag(10L, "Flutter", TagType.SKILL),
-                new Tag(11L, "Figma", TagType.SKILL),
-                new Tag(12L, "Intellij Idea", TagType.SKILL),
-                new Tag(13L, "Git", TagType.SKILL)
+                new Tag(7L, "Java", TagType.SKILL),
+                new Tag(8L, "JavaScript", TagType.SKILL),
+                new Tag(9L, "Flutter", TagType.SKILL),
+                new Tag(10L, "Figma", TagType.SKILL),
+                new Tag(11L, "Intellij Idea", TagType.SKILL),
+                new Tag(12L, "Git", TagType.SKILL)
         );
 
         tagRepo.saveAll(professionTags);
