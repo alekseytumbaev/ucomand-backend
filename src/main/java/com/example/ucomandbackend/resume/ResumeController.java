@@ -39,12 +39,6 @@ public class ResumeController {
         return resumeService.getAllResumesOfCurrentUser();
     }
 
-    //TODO видимость?
-    @GetMapping("/byUserId")
-    public Collection<ResumeDto> getAllResumesByUserId(@RequestParam Long userId) {
-        return resumeService.getAllResumesByUserId(userId);
-    }
-
     @GetMapping("/{resumeId}")
     public ResumeDto getResumeById(@PathVariable Long resumeId) {
         return resumeService.getResumeById(resumeId);
@@ -64,10 +58,9 @@ public class ResumeController {
 
     //TODO только админ
     @PutMapping("/{resumeId}")
-    public Collection<ResumeDto> updateResumeById(@PathVariable Long resumeId,
+    public ResumeDto updateResumeById(@PathVariable Long resumeId,
                                                   @RequestBody @Validated ResumeDto resumeDto) {
-        return null;
-//        return resumeService.updateResumeById(resumeId, resumeDto);
+        return resumeService.updateResumeById(resumeId, resumeDto);
     }
 
     //TODO только свое или админ

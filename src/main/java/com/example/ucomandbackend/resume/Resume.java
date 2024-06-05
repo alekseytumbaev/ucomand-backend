@@ -1,6 +1,7 @@
 package com.example.ucomandbackend.resume;
 
 import com.example.ucomandbackend.resume.dto.MotivationType;
+import com.example.ucomandbackend.resume.dto.VisibilityLevel;
 import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
@@ -44,10 +45,14 @@ public class Resume {
 
     private String details;
 
+    @Enumerated(EnumType.STRING)
+    private VisibilityLevel visibility;
+
     private OffsetDateTime creationDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "resume_id")
+    @Setter(AccessLevel.NONE)
     @ToString.Exclude
     private Set<ResumeCompetenceLevelTag> tags = new HashSet<>();
 

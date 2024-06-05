@@ -45,6 +45,8 @@ public class ResumeDto {
     @Schema(description = "Свободное поле")
     private String details;
 
+    private VisibilityLevel visibility;
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime creationDate;
 }

@@ -26,6 +26,7 @@ public class ResumeMapper {
                 resume.getFreeLink(),
                 resume.getOwnLink(),
                 resume.getDetails(),
+                resume.getVisibility(),
                 resume.getCreationDate()
         );
     }
@@ -39,6 +40,7 @@ public class ResumeMapper {
                 resumeDto.getFreeLink(),
                 resumeDto.getOwnLink(),
                 resumeDto.getDetails(),
+                resumeDto.getVisibility(),
                 resumeDto.getCreationDate(),
                 competenceLevelTags
         );

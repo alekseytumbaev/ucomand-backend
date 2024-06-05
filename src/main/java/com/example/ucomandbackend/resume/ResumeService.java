@@ -3,9 +3,11 @@ package com.example.ucomandbackend.resume;
 import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
 import com.example.ucomandbackend.resume.dto.ResumeDto;
+import com.example.ucomandbackend.resume.exception.ResumeDoesntBelongToUserException;
 import com.example.ucomandbackend.tags.TagMapper;
 import com.example.ucomandbackend.tags.TagService;
 import com.example.ucomandbackend.tags.dto.TagDto;
+import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserService;
 import com.example.ucomandbackend.util.AuthUtils;
 import com.example.ucomandbackend.util.CollectionUtils;
@@ -41,35 +43,41 @@ public class ResumeService {
     public ResumeDto addResumeForCurrentUser(ResumeDto resumeDto) {
         resumeDto.setId(null);
         resumeDto.setCreationDate(OffsetDateTime.now());
-
         long userId = AuthUtils.extractUserIdFromJwt();
-        return saveResumeOfUser(userId, resumeDto);
+        return saveResumeOfUser(resumeDto, userService.getUserById(userId));
     }
 
     /**
-     * @throws NotFoundException       пользователь или резюме не найдено
+     * @throws NotFoundException                 пользователь или резюме не найдено
+     * @throws ResumeDoesntBelongToUserException резюме не принадлежит пользователю
      * @throws CorruptedTokenException
      */
     @Transactional
     public ResumeDto updateResumeOfCurrentUser(Long resumeId, ResumeDto resumeDto) {
-        if (!resumeRepo.existsById(resumeId)) {
-            throw new NotFoundException("Резюме не найдено");
+        var resume = resumeRepo.findById(resumeId).orElseThrow(() -> new NotFoundException("Резюме не найдено"));
+        if (resume.getUser().getId() != AuthUtils.extractUserIdFromJwt()) {
+            throw new ResumeDoesntBelongToUserException("Резюме не принадлежит пользователю");
         }
-        competenceLevelTagRepo.deleteByResume_Id(resumeId);
-        resumeDto.setId(resumeId);
-        resumeDto.setCreationDate(resumeRepo.findCreationDateById(resumeId));
-
-        long userId = AuthUtils.extractUserIdFromJwt();
-        return saveResumeOfUser(userId, resumeDto);
+        return updateResumeById(resumeId, resumeDto);
     }
 
     /**
-     * @throws NotFoundException пользователь не найден
+     * @throws NotFoundException резюме не найдено
      */
     @Transactional
-    public ResumeDto saveResumeOfUser(Long userId, ResumeDto resumeDto) {
-        var user = userService.getUserById(userId);
+    public ResumeDto updateResumeById(Long resumeId, ResumeDto resumeDto) {
+        var resume = resumeRepo.findById(resumeId).orElseThrow(() -> new NotFoundException("Резюме не найдено"));
+        resumeDto.setId(resumeId);
+        resumeDto.setCreationDate(resume.getCreationDate());
+        resume.getTags().clear();
+        resumeRepo.save(resume);
 
+        return saveResumeOfUser(resumeDto, resume.getUser());
+    }
+
+
+    @Transactional
+    public ResumeDto saveResumeOfUser(ResumeDto resumeDto, User user) {
         var resume = resumeRepo.save(ResumeMapper.toResume(resumeDto, user, new HashSet<>()));
 
         Map<Long, TagDto> idsToTagDtos = getTagsFromResumeDto(resumeDto);
@@ -81,7 +89,7 @@ public class ResumeService {
                 .collect(Collectors.toSet());
 
         competenceLevelTagRepo.saveAll(competenceLevelTags);
-        resume.setTags(competenceLevelTags);
+        resume.addTags(competenceLevelTags);
 
         return ResumeMapper.toResumeDto(resumeRepo.save(resume));
     }
@@ -113,8 +121,7 @@ public class ResumeService {
     @Transactional(readOnly = true)
     public ResumeDto getResumeById(Long resumeId) {
         var resume = resumeRepo.findById(resumeId).orElseThrow(() -> new NotFoundException("Резюме не найдено"));
-        return null; //TODO
-//        return ResumeMapper.toResumeDto(resume);
+        return ResumeMapper.toResumeDto(resume);
     }
 
     /**
@@ -128,10 +135,10 @@ public class ResumeService {
         } else {
             resumes = resumeRepo.findAll(PageableMapper.toPageable(pageableDto));
         }
-        return null; //TODO
-//        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
+        return resumes.stream().map(ResumeMapper::toResumeDto).toList();
     }
 
+    //TODO только свое или админ
     @Transactional
     public void deleteResumeById(Long resumeId) {
         resumeRepo.deleteById(resumeId);
