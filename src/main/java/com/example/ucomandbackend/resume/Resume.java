@@ -28,11 +28,9 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //TODO уровень видимости
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     @Enumerated(EnumType.STRING)
     private MotivationType motivation;

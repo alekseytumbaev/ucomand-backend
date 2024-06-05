@@ -16,8 +16,8 @@ public class VacancyMapper {
                 vacancyDto.getId(),
                 user,
                 tags,
-                vacancyDto.getDescription(),
-                vacancyDto.getPayment(),
+                vacancyDto.getDetails(),
+                vacancyDto.getMotivation(),
                 vacancyDto.getCreationDate()
         );
     }
@@ -27,8 +27,8 @@ public class VacancyMapper {
                 vacancy.getId(),
                 UserMapper.toUserDtoWithoutPassword(vacancy.getOwner()),
                 vacancy.getTags().stream().map(TagMapper::toTagDto).toList(),
-                vacancy.getDescription(),
-                vacancy.getPayment(),
+                vacancy.getDetails(),
+                vacancy.getMotivation(),
                 vacancy.getCreationDate()
         );
     }

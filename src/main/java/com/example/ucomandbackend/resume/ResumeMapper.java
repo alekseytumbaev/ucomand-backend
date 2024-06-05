@@ -16,7 +16,7 @@ public class ResumeMapper {
         var profession = resume.getProfession();
         return new ResumeDto(
                 resume.getId(),
-                UserMapper.toUserDtoWithoutPassword(resume.getUser()),
+                UserMapper.toUserDtoWithoutPassword(resume.getOwner()),
                 profession == null ? null : TagMapper.toTagDto(profession.getTag(), profession.getCompetenceLevel()),
                 resume.getSkills().stream()
                         .map(it -> TagMapper.toTagDto(it.getTag(), it.getCompetenceLevel()))

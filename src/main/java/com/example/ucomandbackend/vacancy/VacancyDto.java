@@ -25,10 +25,10 @@ public class VacancyDto {
     private List<TagDto> tags;
 
     @NotBlank
-    private String description;
+    private String details;
 
     @NotNull
-    private MotivationType payment;
+    private MotivationType motivation;
 
     private OffsetDateTime creationDate;
 }

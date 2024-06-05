@@ -55,7 +55,7 @@ public class ResumeService {
     @Transactional
     public ResumeDto updateResumeOfCurrentUser(Long resumeId, ResumeDto resumeDto) {
         var resume = resumeRepo.findById(resumeId).orElseThrow(() -> new NotFoundException("Резюме не найдено"));
-        if (resume.getUser().getId() != AuthUtils.extractUserIdFromJwt()) {
+        if (resume.getOwner().getId() != AuthUtils.extractUserIdFromJwt()) {
             throw new ResumeDoesntBelongToUserException("Резюме не принадлежит пользователю");
         }
         return updateResumeById(resumeId, resumeDto);
@@ -72,7 +72,7 @@ public class ResumeService {
         resume.getTags().clear();
         resumeRepo.save(resume);
 
-        return saveResumeOfUser(resumeDto, resume.getUser());
+        return saveResumeOfUser(resumeDto, resume.getOwner());
     }
 
 

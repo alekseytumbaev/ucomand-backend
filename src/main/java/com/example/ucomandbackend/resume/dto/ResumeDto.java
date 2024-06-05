@@ -22,7 +22,7 @@ public class ResumeDto {
     private Long id;
 
     @Valid
-    private UserDto userDto;
+    private UserDto owner;
 
     @Valid
     private TagDto profession;
