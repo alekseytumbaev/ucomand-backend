@@ -1,7 +1,6 @@
 package com.example.ucomandbackend.ad;
 
 import com.example.ucomandbackend.tags.Tag;
-import com.example.ucomandbackend.tags.dto.CompetenceLevel;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -21,8 +20,7 @@ public class AdCompetenceLevelTag {
     @Column(name = "id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private CompetenceLevel competenceLevel;
+    private Integer competenceLevel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ad_id")

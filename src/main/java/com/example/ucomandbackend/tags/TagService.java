@@ -25,7 +25,7 @@ public class TagService {
         tagDto.setId(null);
         tagDto.setName(tagDto.getName().strip());
         var tag = tagRepo.save(TagMapper.toTag(tagDto));
-        return TagMapper.toTagDto(tag);
+        return TagMapper.toTagDtoWithoutCompetenceLevel(tag);
     }
 
     public void deleteTagById(Long tagId) {
@@ -41,7 +41,7 @@ public class TagService {
         tagDto.setId(tagId);
         tagDto.setName(tagDto.getName().strip());
         var tag = tagRepo.save(TagMapper.toTag(tagDto));
-        return TagMapper.toTagDto(tag);
+        return TagMapper.toTagDtoWithoutCompetenceLevel(tag);
     }
 
     /**
@@ -50,7 +50,7 @@ public class TagService {
     @Transactional(readOnly = true)
     public TagDto getTagById(Long tagId) {
         var tag = tagRepo.findById(tagId).orElseThrow(() -> new NotFoundException("Тег не найден"));
-        return TagMapper.toTagDto(tag);
+        return TagMapper.toTagDtoWithoutCompetenceLevel(tag);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TagService {
     @Transactional(readOnly = true)
     public List<TagDto> getAllTags(List<TagType> types) {
         var tags = types.isEmpty() ? tagRepo.findAll() : tagRepo.findAllByTypeIn(types);
-        return tags.stream().map(TagMapper::toTagDto).toList();
+        return tags.stream().map(TagMapper::toTagDtoWithoutCompetenceLevel).toList();
     }
 
     @Transactional(readOnly = true)

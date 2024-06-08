@@ -2,7 +2,6 @@ package com.example.ucomandbackend.tags;
 
 import com.example.ucomandbackend.ad.Ad;
 import com.example.ucomandbackend.ad.AdCompetenceLevelTag;
-import com.example.ucomandbackend.tags.dto.CompetenceLevel;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import lombok.experimental.UtilityClass;
 
@@ -19,17 +18,22 @@ public class TagMapper {
         );
     }
 
-    public TagDto toTagDto(Tag tag, CompetenceLevel competenceLevel) {
-        return new TagDto(
-                tag.getId(),
-                tag.getName(),
+    public AdCompetenceLevelTag toAdCompetenceLevelTag(Long id, Tag tag, Ad ad, Integer competenceLevel) {
+        return new AdCompetenceLevelTag(
+                id,
                 competenceLevel,
-                tag.getType()
+                ad,
+                tag
         );
     }
 
-    public TagDto toTagDto(Tag tag) {
-        return toTagDto(tag, null);
+    public TagDto toTagDtoWithoutCompetenceLevel(Tag tag) {
+        return new TagDto(
+                tag.getId(),
+                tag.getName(),
+                null,
+                tag.getType()
+        );
     }
 
     public Tag toTag(TagDto tag) {
@@ -37,18 +41,6 @@ public class TagMapper {
                 tag.getId(),
                 tag.getName(),
                 tag.getType()
-        );
-    }
-
-    public AdCompetenceLevelTag toAdCompetenceLevelTag(Long id,
-                                                       Tag tag,
-                                                       Ad ad,
-                                                       CompetenceLevel competenceLevel) {
-        return new AdCompetenceLevelTag(
-                id,
-                competenceLevel,
-                ad,
-                tag
         );
     }
 }

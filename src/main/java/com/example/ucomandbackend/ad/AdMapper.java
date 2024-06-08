@@ -50,7 +50,7 @@ public class AdMapper {
         return new AdDto(
                 ad.getId(),
                 UserMapper.toUserDtoWithoutTelegram(ad.getUser()),
-                ad.getProfession() == null ? null : TagMapper.toTagDto(ad.getProfession().getTag()),
+                ad.getProfession() == null ? null : TagMapper.toTagDto(ad.getProfession()),
                 ad.getSkills().stream().map(TagMapper::toTagDto).collect(Collectors.toSet()),
                 ad.getMotivations().stream().map(TagMapper::toTagDto).collect(Collectors.toSet()),
                 ad.getFreeLink(),

@@ -56,4 +56,11 @@ public class AdDto {
     public AdType getAdType() {
         throw new NotImplementedException("Тип объявления не задан");
     }
+
+    @JsonIgnore
+    public Set<TagDto> getTags() {
+        skills.add(profession);
+        skills.addAll(motivations);
+        return skills;
+    }
 }
