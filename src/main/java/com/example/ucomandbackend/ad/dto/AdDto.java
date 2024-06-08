@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -59,8 +60,9 @@ public class AdDto {
 
     @JsonIgnore
     public Set<TagDto> getTags() {
-        skills.add(profession);
-        skills.addAll(motivations);
-        return skills;
+        var tags = new HashSet<>(skills);
+        tags.add(profession);
+        tags.addAll(motivations);
+        return tags;
     }
 }

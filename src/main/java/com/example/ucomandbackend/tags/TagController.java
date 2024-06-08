@@ -2,6 +2,8 @@ package com.example.ucomandbackend.tags;
 
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.tags.dto.TagType;
+import com.example.ucomandbackend.util.OnCreate;
+import com.example.ucomandbackend.util.OnUpdate;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,7 +24,7 @@ public class TagController {
     private final TagService tagService;
 
     @PostMapping
-    public TagDto addTag(@RequestBody @Validated TagDto tagDto) {
+    public TagDto addTag(@RequestBody @Validated({OnCreate.class}) TagDto tagDto) {
         return tagService.addTag(tagDto);
     }
 
@@ -45,7 +47,7 @@ public class TagController {
 
     //TODO только админ
     @PutMapping("/{tagId}")
-    public TagDto updateTagById(@PathVariable Long tagId, @RequestBody @Validated TagDto tagDto) {
+    public TagDto updateTagById(@PathVariable Long tagId, @RequestBody @Validated({OnUpdate.class}) TagDto tagDto) {
         return tagService.updateTagById(tagId, tagDto);
     }
 }

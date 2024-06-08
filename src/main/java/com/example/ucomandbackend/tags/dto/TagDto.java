@@ -1,5 +1,7 @@
 package com.example.ucomandbackend.tags.dto;
 
+import com.example.ucomandbackend.util.OnCreate;
+import com.example.ucomandbackend.util.OnUpdate;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,14 +11,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class TagDto {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = {OnCreate.class, OnUpdate.class})
     @Size(min = 1, max = 64)
     @Schema(description = "Уникальное", example = "Java")
     private String name;

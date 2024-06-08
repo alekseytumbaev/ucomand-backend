@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,12 +80,15 @@ public class AdService {
     public AdDto saveAdOfUser(AdDto adDto, User user) {
         var ad = adRepo.save(AdMapper.toAdd(adDto, user, new HashSet<>()));
 
-        Map<Long, TagDto> idsToTagDtos = adDto.getTags().stream().collect(Collectors.toMap(TagDto::getId, it -> it));
-        var tags = tagService.getAllTagsByIds(idsToTagDtos.keySet());
+        var tagIdsToCompetenceLevels = new HashMap<Long, Integer>();
+        for (TagDto tagDto : adDto.getTags()) {
+            tagIdsToCompetenceLevels.put(tagDto.getId(), tagDto.getCompetenceLevel());
+        }
+        var tags = tagService.getAllTagsByIds(tagIdsToCompetenceLevels.keySet());
 
         var competenceLevelTags = tags.stream()
                 .map(tag -> TagMapper.toAdCompetenceLevelTag(
-                        null, tag, ad, idsToTagDtos.get(tag.getId()).getCompetenceLevel()))
+                        null, tag, ad, tagIdsToCompetenceLevels.get(tag.getId())))
                 .collect(Collectors.toSet());
 
         competenceLevelTagRepo.saveAll(competenceLevelTags);
