@@ -5,6 +5,6 @@ public class CorruptedTokenException extends AbstractOpenApiException {
     public static final String DESC = "Не валидный токен";
 
     public CorruptedTokenException(String message) {
-        super(CODE, message);
+        super(CODE, message, "Пожалуйста, попробуйте войти заново");
     }
 }

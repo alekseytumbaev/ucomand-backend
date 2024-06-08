@@ -75,9 +75,6 @@ public class DataInitializer implements CommandLineRunner {
                 OffsetDateTime.now(),
                 null,
                 "rootadmin", //TODO поместить в пропертис
-                null,
-                null,
-                null,
                 UserRole.ROOT
         );
         userRepo.save(root);

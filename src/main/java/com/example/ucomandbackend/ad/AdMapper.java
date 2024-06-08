@@ -21,9 +21,9 @@ public class AdMapper {
                 adDto.getProfession(),
                 adDto.getSkills(),
                 adDto.getMotivation(),
-                adDto.getHoursPerWeek(),
                 adDto.getFreeLink(),
                 adDto.getOwnLink(),
+                adDto.getContacts(),
                 adDto.getDetails(),
                 adDto.getVisibility(),
                 adDto.getCreationDate()
@@ -37,9 +37,9 @@ public class AdMapper {
                 adDto.getProfession(),
                 adDto.getSkills(),
                 adDto.getMotivation(),
-                adDto.getHoursPerWeek(),
                 adDto.getFreeLink(),
                 adDto.getOwnLink(),
+                adDto.getContacts(),
                 adDto.getDetails(),
                 adDto.getVisibility(),
                 adDto.getCreationDate()
@@ -50,15 +50,15 @@ public class AdMapper {
         var profession = ad.getProfession();
         return new AdDto(
                 ad.getId(),
-                UserMapper.toUserDtoWithoutPassword(ad.getUser()),
+                UserMapper.toUserDtoWithoutTelegram(ad.getUser()),
                 profession == null ? null : TagMapper.toTagDto(profession.getTag(), profession.getCompetenceLevel()),
                 ad.getSkills().stream()
                         .map(it -> TagMapper.toTagDto(it.getTag(), it.getCompetenceLevel()))
                         .collect(Collectors.toSet()),
                 ad.getMotivation(),
-                ad.getHoursPerWeek(),
                 ad.getFreeLink(),
                 ad.getOwnLink(),
+                ad.getContacts(),
                 ad.getDetails(),
                 ad.getVisibility(),
                 ad.getCreationDate()
@@ -79,9 +79,9 @@ public class AdMapper {
                 user,
                 competenceLevelTags,
                 adDto.getMotivation(),
-                adDto.getHoursPerWeek(),
                 adDto.getFreeLink(),
                 adDto.getOwnLink(),
+                adDto.getContacts(),
                 adDto.getDetails(),
                 adDto.getVisibility(),
                 adDto.getCreationDate()

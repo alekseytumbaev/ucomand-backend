@@ -49,14 +49,6 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String telegram;
 
-    @Column(unique = true)
-    private String phone;
-
-    @Column(unique = true)
-    private String email;
-
-    private String password;
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -67,7 +59,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return telegram;
     }
 
     @Override

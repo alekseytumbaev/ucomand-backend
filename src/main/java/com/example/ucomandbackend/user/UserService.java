@@ -4,7 +4,7 @@ import com.example.ucomandbackend.error_handling.common_exception.NotFoundExcept
 import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.security.TokenService;
 import com.example.ucomandbackend.user.dto.UserDto;
-import com.example.ucomandbackend.util.AuthUtils;
+import com.example.ucomandbackend.security.AuthUtils;
 import com.example.ucomandbackend.util.PageableDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import lombok.RequiredArgsConstructor;
@@ -34,14 +34,14 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDto getCurrentUser() {
         long userId = AuthUtils.extractUserIdFromJwt();
-        return UserMapper.toUserDtoWithoutPassword(getUserById(userId));
+        return UserMapper.toUserDtoWithoutTelegram(getUserById(userId));
     }
 
     @Transactional(readOnly = true)
     public List<UserDto> getAllUsers(PageableDto pageableDto) {
         return userRepo.findAll(PageableMapper.toPageable(pageableDto))
                 .stream()
-                .map(UserMapper::toUserDtoWithoutPassword).toList();
+                .map(UserMapper::toUserDtoWithoutTelegram).toList();
     }
 
     //TODO сделать проверку, что пользователя могут удалять только админы, либо он сам себя
@@ -68,6 +68,6 @@ public class UserService {
         userDto.setId(user.getId());
         userDto.setTelegram(user.getTelegram());
         userDto.setRole(user.getRole());
-        return UserMapper.toUserDtoWithoutPassword(userRepo.save(UserMapper.toUser(userDto, user.getPassword())));
+        return UserMapper.toUserDtoWithoutTelegram(userRepo.save(UserMapper.toUser(userDto)));
     }
 }

@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class UserMapper {
 
-    public UserDto toUserDtoWithoutPassword(User user) {
+    public UserDto toUserDtoWithoutTelegram(User user) {
         return new UserDto(
                 user.getId(),
                 user.getFirstName(),
@@ -18,15 +18,12 @@ public class UserMapper {
                 user.getAboutMe(),
                 user.getDateOfRegistration(),
                 user.getCityOfResidence(),
-                user.getTelegram(),
-                user.getEmail(),
-                user.getPhone(),
                 null,
                 user.getRole()
         );
     }
 
-    public User toUser(UserDto userDto, String password) {
+    public User toUser(UserDto userDto) {
         return new User(
                 userDto.getId(),
                 userDto.getFirstName(),
@@ -39,9 +36,6 @@ public class UserMapper {
                 userDto.getDateOfRegistration(),
                 userDto.getCityOfResidence(),
                 userDto.getTelegram(),
-                userDto.getPhone(),
-                userDto.getEmail(),
-                password,
                 userDto.getRole()
         );
     }

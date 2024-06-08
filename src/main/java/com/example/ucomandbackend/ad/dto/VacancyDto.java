@@ -4,7 +4,6 @@ import com.example.ucomandbackend.ad.AdType;
 import com.example.ucomandbackend.tags.dto.TagDto;
 import com.example.ucomandbackend.user.dto.UserDto;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,9 +22,9 @@ public class VacancyDto extends AdDto {
                       @Valid TagDto profession,
                       @Valid @NotNull Set<TagDto> skills,
                       @NotNull MotivationType motivation,
-                      @Min(1) @NotNull int hoursPerWeek,
                       String freeLink,
                       String ownLink,
+                      String contacts,
                       String details,
                       VisibilityLevel visibility,
                       OffsetDateTime creationDate) {
@@ -34,9 +33,9 @@ public class VacancyDto extends AdDto {
                 profession,
                 skills,
                 motivation,
-                hoursPerWeek,
                 freeLink,
                 ownLink,
+                contacts,
                 details,
                 visibility,
                 creationDate);

@@ -44,11 +44,11 @@ public class Ad {
     @Enumerated(EnumType.STRING)
     private MotivationType motivation;
 
-    private int hoursPerWeek;
-
     private String freeLink;
 
     private String ownLink;
+
+    private String contacts;
 
     private String details;
 

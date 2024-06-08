@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.util;
+package com.example.ucomandbackend.security;
 
 import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
 import lombok.experimental.UtilityClass;
