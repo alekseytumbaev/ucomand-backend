@@ -9,6 +9,16 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TagMapper {
 
+    public TagDto toTagDto(AdCompetenceLevelTag adCompetenceLevelTag) {
+        var tag = adCompetenceLevelTag.getTag();
+        return new TagDto(
+                tag.getId(),
+                tag.getName(),
+                adCompetenceLevelTag.getCompetenceLevel(),
+                tag.getType()
+        );
+    }
+
     public TagDto toTagDto(Tag tag, CompetenceLevel competenceLevel) {
         return new TagDto(
                 tag.getId(),

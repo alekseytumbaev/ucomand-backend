@@ -1,6 +1,5 @@
 package com.example.ucomandbackend.ad;
 
-import com.example.ucomandbackend.ad.dto.MotivationType;
 import com.example.ucomandbackend.ad.dto.VisibilityLevel;
 import com.example.ucomandbackend.tags.dto.TagType;
 import com.example.ucomandbackend.user.User;
@@ -41,9 +40,6 @@ public class Ad {
     @ToString.Exclude
     private Set<AdCompetenceLevelTag> tags = new HashSet<>();
 
-    @Enumerated(EnumType.STRING)
-    private MotivationType motivation;
-
     private String freeLink;
 
     private String ownLink;
@@ -83,6 +79,12 @@ public class Ad {
     public Set<AdCompetenceLevelTag> getSkills() {
         return tags.stream()
                 .filter(tag -> tag.getTag().getType() == TagType.SKILL)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<AdCompetenceLevelTag> getMotivations() {
+        return tags.stream()
+                .filter(tag -> tag.getTag().getType() == TagType.MOTIVATION)
                 .collect(Collectors.toSet());
     }
 

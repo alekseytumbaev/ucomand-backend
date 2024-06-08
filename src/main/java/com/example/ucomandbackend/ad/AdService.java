@@ -80,7 +80,7 @@ public class AdService {
     public AdDto saveAdOfUser(AdDto adDto, User user) {
         var ad = adRepo.save(AdMapper.toAdd(adDto, user, new HashSet<>()));
 
-        Map<Long, TagDto> idsToTagDtos = getTagsFromAdDto(adDto);
+        Map<Long, TagDto> idsToTagDtos = getTagIdsToTagDtos(adDto);
         var tags = tagService.getAllTagsByIds(idsToTagDtos.keySet());
 
         var competenceLevelTags = tags.stream()
@@ -94,7 +94,7 @@ public class AdService {
         return AdMapper.toAdDto(adRepo.save(ad));
     }
 
-    private Map<Long, TagDto> getTagsFromAdDto(AdDto adDto) {
+    private Map<Long, TagDto> getTagIdsToTagDtos(AdDto adDto) {
         Map<Long, TagDto> idsToTags = adDto.getSkills().stream().collect(Collectors.toMap(TagDto::getId, it -> it));
         idsToTags.put(adDto.getProfession().getId(), adDto.getProfession());
         return idsToTags;

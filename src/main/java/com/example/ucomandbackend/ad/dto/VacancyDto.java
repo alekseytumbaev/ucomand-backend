@@ -17,28 +17,8 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class VacancyDto extends AdDto {
 
-    public VacancyDto(Long id,
-                      @Valid UserDto user,
-                      @Valid TagDto profession,
-                      @Valid @NotNull Set<TagDto> skills,
-                      @NotNull MotivationType motivation,
-                      String freeLink,
-                      String ownLink,
-                      String contacts,
-                      String details,
-                      VisibilityLevel visibility,
-                      OffsetDateTime creationDate) {
-        super(id,
-                user,
-                profession,
-                skills,
-                motivation,
-                freeLink,
-                ownLink,
-                contacts,
-                details,
-                visibility,
-                creationDate);
+    public VacancyDto(Long id, @Valid UserDto user, @Valid @NotNull TagDto profession, @Valid @NotNull Set<TagDto> skills, @Valid @NotNull Set<TagDto> motivations, String freeLink, String ownLink, String contacts, String details, VisibilityLevel visibility, OffsetDateTime creationDate) {
+        super(id, user, profession, skills, motivations, freeLink, ownLink, contacts, details, visibility, creationDate);
     }
 
     @Override

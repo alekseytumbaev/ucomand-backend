@@ -35,24 +35,31 @@ public class DataInitializer implements CommandLineRunner {
             return;
         }
 
+        var motivationTags = List.of(
+                new Tag(1L, "Без оплаты", TagType.MOTIVATION),
+                new Tag(2L, "Заработная плата", TagType.MOTIVATION),
+                new Tag(3L, "Опционы", TagType.MOTIVATION)
+        );
+
         var professionTags = List.of(
-                new Tag(1L, "Администратор", TagType.PROFESSION),
-                new Tag(2L, "Разработчик", TagType.PROFESSION),
-                new Tag(3L, "Тестировщик", TagType.PROFESSION),
-                new Tag(4L, "Аналитик", TagType.PROFESSION),
-                new Tag(5L, "Менеджер", TagType.PROFESSION),
-                new Tag(6L, "Дизайнер", TagType.PROFESSION)
+                new Tag(4L, "Администратор", TagType.PROFESSION),
+                new Tag(5L, "Разработчик", TagType.PROFESSION),
+                new Tag(6L, "Тестировщик", TagType.PROFESSION),
+                new Tag(7L, "Аналитик", TagType.PROFESSION),
+                new Tag(8L, "Менеджер", TagType.PROFESSION),
+                new Tag(9L, "Дизайнер", TagType.PROFESSION)
         );
 
         var skillTags = List.of(
-                new Tag(7L, "Java", TagType.SKILL),
-                new Tag(8L, "JavaScript", TagType.SKILL),
-                new Tag(9L, "Flutter", TagType.SKILL),
-                new Tag(10L, "Figma", TagType.SKILL),
-                new Tag(11L, "Intellij Idea", TagType.SKILL),
-                new Tag(12L, "Git", TagType.SKILL)
+                new Tag(10L, "Java", TagType.SKILL),
+                new Tag(11L, "JavaScript", TagType.SKILL),
+                new Tag(12L, "Flutter", TagType.SKILL),
+                new Tag(13L, "Figma", TagType.SKILL),
+                new Tag(14L, "Intellij Idea", TagType.SKILL),
+                new Tag(15L, "Git", TagType.SKILL)
         );
 
+        tagRepo.saveAll(motivationTags);
         tagRepo.saveAll(professionTags);
         tagRepo.saveAll(skillTags);
     }

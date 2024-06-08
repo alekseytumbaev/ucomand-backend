@@ -27,14 +27,16 @@ public class AdDto {
     private UserDto user;
 
     @Valid
+    @NotNull
     private TagDto profession;
 
     @Valid
     @NotNull
     private Set<TagDto> skills;
 
+    @Valid
     @NotNull
-    private MotivationType motivation;
+    private Set<TagDto> motivations;
 
     private String freeLink;
 
