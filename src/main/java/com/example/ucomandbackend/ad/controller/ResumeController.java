@@ -2,10 +2,12 @@ package com.example.ucomandbackend.ad.controller;
 
 import com.example.ucomandbackend.ad.AdMapper;
 import com.example.ucomandbackend.ad.AdService;
+import com.example.ucomandbackend.ad.AdSorter;
 import com.example.ucomandbackend.ad.dto.ResumeDto;
 import com.example.ucomandbackend.ad.dto.ResumeFilterDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
@@ -58,9 +60,15 @@ public class ResumeController {
                                                @RequestParam(defaultValue = "10")
                                                @Validated @Min(1) Integer size,
 
+                                               @Parameter(description = "Строки вида path.to.field_desc или " +
+                                                       "path.to.field, по умолчанию asc. " +
+                                                       "Сортировать можно по: " + AdSorter.AVAILABLE_SORT_DESCRIPTION)
+                                               @RequestParam(defaultValue = "")
+                                               @Validated Collection<String> sorts,
+
                                                @RequestBody(required = false)
                                                @Validated ResumeFilterDto filterDto) {
-        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size), filterDto);
+        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size, sorts), filterDto);
     }
 
     //TODO только админ

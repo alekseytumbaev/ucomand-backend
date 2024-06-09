@@ -124,7 +124,8 @@ public class AdService {
 
     @Transactional(readOnly = true)
     public List<AdDto> getAllAds(PageableDto pageableDto, AdFilterDto filterDto) {
-        Page<Ad> ads = adRepo.findAll(AdSpecs.where(filterDto), PageableMapper.toPageable(pageableDto));
+        Page<Ad> ads = adRepo.findAll(AdSpecs.where(filterDto),
+                PageableMapper.toPageable(pageableDto, AdSorter::sortBy));
         return ads.stream().map(AdMapper::toAdDto).toList();
     }
 
