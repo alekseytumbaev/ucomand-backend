@@ -3,10 +3,12 @@ package com.example.ucomandbackend.ad.controller;
 import com.example.ucomandbackend.ad.AdMapper;
 import com.example.ucomandbackend.ad.AdService;
 import com.example.ucomandbackend.ad.dto.VacancyDto;
+import com.example.ucomandbackend.ad.dto.VacancyFilterDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -43,17 +45,22 @@ public class VacancyController {
     }
 
     @GetMapping("/{vacancyId}")
+    @SecurityRequirements
     public VacancyDto getVacancyById(@PathVariable Long vacancyId) {
         return AdMapper.toVacancyDto(adService.getAdById(VACANCY, vacancyId));
     }
 
-    @GetMapping
+    @PostMapping("/getAll")
+    @SecurityRequirements
     public Collection<VacancyDto> getAllVacancies(@RequestParam(defaultValue = "0")
                                                   @Validated @Min(0) Integer page,
 
                                                   @RequestParam(defaultValue = "10")
-                                                  @Validated @Min(1) Integer size) {
-        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size), VACANCY);
+                                                  @Validated @Min(1) Integer size,
+
+                                                  @RequestBody(required = false)
+                                                  @Validated VacancyFilterDto filterDto) {
+        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size), filterDto);
     }
 
     //TODO только админ

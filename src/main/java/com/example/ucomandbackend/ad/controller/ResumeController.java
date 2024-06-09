@@ -3,10 +3,12 @@ package com.example.ucomandbackend.ad.controller;
 import com.example.ucomandbackend.ad.AdMapper;
 import com.example.ucomandbackend.ad.AdService;
 import com.example.ucomandbackend.ad.dto.ResumeDto;
+import com.example.ucomandbackend.ad.dto.ResumeFilterDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -43,17 +45,22 @@ public class ResumeController {
     }
 
     @GetMapping("/{resumeId}")
+    @SecurityRequirements
     public ResumeDto getResumeById(@PathVariable Long resumeId) {
         return AdMapper.toResumeDto(adService.getAdById(RESUME, resumeId));
     }
 
-    @GetMapping
+    @PostMapping("/getAll")
+    @SecurityRequirements
     public Collection<ResumeDto> getAllResumes(@RequestParam(defaultValue = "0")
                                                @Validated @Min(0) Integer page,
 
                                                @RequestParam(defaultValue = "10")
-                                               @Validated @Min(1) Integer size) {
-        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size), RESUME);
+                                               @Validated @Min(1) Integer size,
+
+                                               @RequestBody(required = false)
+                                               @Validated ResumeFilterDto filterDto) {
+        return (Collection) adService.getAllAds(PageableMapper.toPageableDto(page, size), filterDto);
     }
 
     //TODO только админ

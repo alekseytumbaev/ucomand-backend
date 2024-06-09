@@ -1,6 +1,7 @@
 package com.example.ucomandbackend.ad;
 
 import com.example.ucomandbackend.ad.dto.AdDto;
+import com.example.ucomandbackend.ad.dto.AdFilterDto;
 import com.example.ucomandbackend.ad.exception.AdDoesntBelongToUserException;
 import com.example.ucomandbackend.error_handling.common_exception.CorruptedTokenException;
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
@@ -122,8 +123,8 @@ public class AdService {
     }
 
     @Transactional(readOnly = true)
-    public List<AdDto> getAllAds(PageableDto pageableDto, AdType adType) {
-        Page<Ad> ads = adRepo.findAllByType(PageableMapper.toPageable(pageableDto), adType);
+    public List<AdDto> getAllAds(PageableDto pageableDto, AdFilterDto filterDto) {
+        Page<Ad> ads = adRepo.findAll(AdSpecs.where(filterDto), PageableMapper.toPageable(pageableDto));
         return ads.stream().map(AdMapper::toAdDto).toList();
     }
 
