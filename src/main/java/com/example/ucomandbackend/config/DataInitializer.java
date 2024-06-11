@@ -1,8 +1,8 @@
 package com.example.ucomandbackend.config;
 
-import com.example.ucomandbackend.tags.Tag;
-import com.example.ucomandbackend.tags.TagRepository;
-import com.example.ucomandbackend.tags.dto.TagType;
+import com.example.ucomandbackend.tag.Tag;
+import com.example.ucomandbackend.tag.TagRepository;
+import com.example.ucomandbackend.tag.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserRepository;
 import com.example.ucomandbackend.user.dto.Gender;

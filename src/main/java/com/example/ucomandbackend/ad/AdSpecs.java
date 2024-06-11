@@ -1,7 +1,7 @@
 package com.example.ucomandbackend.ad;
 
 import com.example.ucomandbackend.ad.dto.AdFilterDto;
-import com.example.ucomandbackend.tags.dto.TagDto;
+import com.example.ucomandbackend.tag.dto.TagDto;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;

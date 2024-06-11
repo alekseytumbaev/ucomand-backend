@@ -1,8 +1,8 @@
-package com.example.ucomandbackend.tags;
+package com.example.ucomandbackend.tag;
 
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
-import com.example.ucomandbackend.tags.dto.TagDto;
-import com.example.ucomandbackend.tags.dto.TagType;
+import com.example.ucomandbackend.tag.dto.TagDto;
+import com.example.ucomandbackend.tag.dto.TagType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

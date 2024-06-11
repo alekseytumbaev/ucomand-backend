@@ -1,8 +1,8 @@
-package com.example.ucomandbackend.tags;
+package com.example.ucomandbackend.tag;
 
 import com.example.ucomandbackend.ad.Ad;
 import com.example.ucomandbackend.ad.AdCompetenceLevelTag;
-import com.example.ucomandbackend.tags.dto.TagDto;
+import com.example.ucomandbackend.tag.dto.TagDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

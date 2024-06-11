@@ -1,4 +1,4 @@
-package com.example.ucomandbackend.tags.dto;
+package com.example.ucomandbackend.tag.dto;
 
 public enum TagType {
     PROFESSION,

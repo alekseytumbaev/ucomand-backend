@@ -3,7 +3,7 @@ package com.example.ucomandbackend.ad;
 import com.example.ucomandbackend.ad.dto.AdDto;
 import com.example.ucomandbackend.ad.dto.ResumeDto;
 import com.example.ucomandbackend.ad.dto.VacancyDto;
-import com.example.ucomandbackend.tags.TagMapper;
+import com.example.ucomandbackend.tag.TagMapper;
 import com.example.ucomandbackend.user.User;
 import com.example.ucomandbackend.user.UserMapper;
 import lombok.experimental.UtilityClass;

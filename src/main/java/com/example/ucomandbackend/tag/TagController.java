@@ -1,7 +1,7 @@
-package com.example.ucomandbackend.tags;
+package com.example.ucomandbackend.tag;
 
-import com.example.ucomandbackend.tags.dto.TagDto;
-import com.example.ucomandbackend.tags.dto.TagType;
+import com.example.ucomandbackend.tag.dto.TagDto;
+import com.example.ucomandbackend.tag.dto.TagType;
 import com.example.ucomandbackend.util.OnCreate;
 import com.example.ucomandbackend.util.OnUpdate;
 import io.swagger.v3.oas.annotations.Operation;

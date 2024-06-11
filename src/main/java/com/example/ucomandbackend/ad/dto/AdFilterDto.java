@@ -1,7 +1,7 @@
 package com.example.ucomandbackend.ad.dto;
 
 import com.example.ucomandbackend.ad.AdType;
-import com.example.ucomandbackend.tags.dto.TagDto;
+import com.example.ucomandbackend.tag.dto.TagDto;
 import com.example.ucomandbackend.user.dto.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

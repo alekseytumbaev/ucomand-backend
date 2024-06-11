@@ -1,6 +1,6 @@
 package com.example.ucomandbackend.ad;
 
-import com.example.ucomandbackend.tags.Tag;
+import com.example.ucomandbackend.tag.Tag;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;

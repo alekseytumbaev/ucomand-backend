@@ -1,7 +1,7 @@
 package com.example.ucomandbackend.ad;
 
 import com.example.ucomandbackend.ad.dto.VisibilityLevel;
-import com.example.ucomandbackend.tags.dto.TagType;
+import com.example.ucomandbackend.tag.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
