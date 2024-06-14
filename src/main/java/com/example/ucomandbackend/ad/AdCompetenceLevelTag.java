@@ -3,6 +3,7 @@ package com.example.ucomandbackend.ad;
 import com.example.ucomandbackend.tag.Tag;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class AdCompetenceLevelTag {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

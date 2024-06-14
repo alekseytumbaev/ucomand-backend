@@ -11,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.OffsetDateTime;
@@ -20,6 +21,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class AdDto {
 
     private Long id;

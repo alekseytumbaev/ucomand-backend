@@ -3,6 +3,7 @@ package com.example.ucomandbackend.tag;
 import com.example.ucomandbackend.tag.dto.TagType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class Tag {
 
     @Id

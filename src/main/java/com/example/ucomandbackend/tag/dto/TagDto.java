@@ -10,10 +10,12 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class TagDto {
 
     private Long id;

@@ -5,6 +5,7 @@ import com.example.ucomandbackend.tag.dto.TagType;
 import com.example.ucomandbackend.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.lang.Nullable;
 
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class Ad {
 
     @Id

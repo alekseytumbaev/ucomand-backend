@@ -4,6 +4,7 @@ import com.example.ucomandbackend.user.dto.Gender;
 import com.example.ucomandbackend.user.dto.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants(innerTypeName = "F")
 public class User implements UserDetails {
 
     @Id
