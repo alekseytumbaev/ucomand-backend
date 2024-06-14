@@ -14,13 +14,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 
     @Id

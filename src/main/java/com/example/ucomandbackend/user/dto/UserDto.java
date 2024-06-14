@@ -13,7 +13,6 @@ import java.time.OffsetDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Либо email, либо phone должны быть указаны")
 public class UserDto {
 
     private Long id;

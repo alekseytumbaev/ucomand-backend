@@ -7,13 +7,13 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "tags")
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tag {
 
     @Id

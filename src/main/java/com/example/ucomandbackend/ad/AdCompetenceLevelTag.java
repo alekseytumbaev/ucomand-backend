@@ -7,13 +7,13 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "ad_competence_level_tags")
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdCompetenceLevelTag {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

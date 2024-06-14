@@ -14,13 +14,13 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "ads")
 @Entity
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Ad {
 
     @Id
