@@ -37,26 +37,27 @@ public class DataInitializer implements CommandLineRunner {
 
         var motivationTags = List.of(
                 new Tag(1L, "Без оплаты", TagType.MOTIVATION),
-                new Tag(2L, "Заработная плата", TagType.MOTIVATION),
-                new Tag(3L, "Опционы", TagType.MOTIVATION)
+                new Tag(2L, "За оплату", TagType.MOTIVATION),
+                new Tag(3L, "За долю", TagType.MOTIVATION),
+                new Tag(4L, "Нужна практика", TagType.MOTIVATION)
         );
 
         var professionTags = List.of(
-                new Tag(4L, "Администратор", TagType.PROFESSION),
-                new Tag(5L, "Разработчик", TagType.PROFESSION),
-                new Tag(6L, "Тестировщик", TagType.PROFESSION),
-                new Tag(7L, "Аналитик", TagType.PROFESSION),
-                new Tag(8L, "Менеджер", TagType.PROFESSION),
-                new Tag(9L, "Дизайнер", TagType.PROFESSION)
+                new Tag(5L, "Администратор", TagType.PROFESSION),
+                new Tag(6L, "Разработчик", TagType.PROFESSION),
+                new Tag(7L, "Тестировщик", TagType.PROFESSION),
+                new Tag(8L, "Аналитик", TagType.PROFESSION),
+                new Tag(9L, "Менеджер", TagType.PROFESSION),
+                new Tag(10L, "Дизайнер", TagType.PROFESSION)
         );
 
         var skillTags = List.of(
-                new Tag(10L, "Java", TagType.SKILL),
-                new Tag(11L, "JavaScript", TagType.SKILL),
-                new Tag(12L, "Flutter", TagType.SKILL),
-                new Tag(13L, "Figma", TagType.SKILL),
-                new Tag(14L, "Intellij Idea", TagType.SKILL),
-                new Tag(15L, "Git", TagType.SKILL)
+                new Tag(11L, "Java", TagType.SKILL),
+                new Tag(12L, "JavaScript", TagType.SKILL),
+                new Tag(13L, "Flutter", TagType.SKILL),
+                new Tag(14L, "Figma", TagType.SKILL),
+                new Tag(15L, "Intellij Idea", TagType.SKILL),
+                new Tag(16L, "Git", TagType.SKILL)
         );
 
         tagRepo.saveAll(motivationTags);

@@ -1,9 +1,11 @@
 package com.example.ucomandbackend.user.dto;
 
+import com.example.ucomandbackend.city.dto.CityDto;
 import com.example.ucomandbackend.util.OnCreate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,7 @@ public class UserDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dateOfRegistration;
 
-    private String cityOfResidence;
+    private CityDto cityOfResidence;
 
     @Schema(description = "Уникальное. Нельзя поменять и посомтреть после создания пользователя")
     @NotBlank(groups = OnCreate.class)

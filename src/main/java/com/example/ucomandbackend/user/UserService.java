@@ -1,10 +1,11 @@
 package com.example.ucomandbackend.user;
 
+import com.example.ucomandbackend.city.CityService;
 import com.example.ucomandbackend.error_handling.common_exception.NotFoundException;
+import com.example.ucomandbackend.security.AuthUtils;
 import com.example.ucomandbackend.security.TokenDto;
 import com.example.ucomandbackend.security.TokenService;
 import com.example.ucomandbackend.user.dto.UserDto;
-import com.example.ucomandbackend.security.AuthUtils;
 import com.example.ucomandbackend.util.PageableDto;
 import com.example.ucomandbackend.util.PageableMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepo;
+    private final CityService cityService;
     private final TokenService tokenService;
 
     /**
@@ -59,7 +62,7 @@ public class UserService {
     }
 
     /**
-     * @throws NotFoundException пользователь не найден
+     * @throws NotFoundException пользователь или город не найден
      */
     @Transactional
     public UserDto updateCurrentUser(UserDto userDto) {
@@ -68,6 +71,7 @@ public class UserService {
         userDto.setId(user.getId());
         userDto.setTelegram(user.getTelegram());
         userDto.setRole(user.getRole());
-        return UserMapper.toUserDtoWithoutTelegram(userRepo.save(UserMapper.toUser(userDto)));
+        var city = cityService.getCityById(userDto.getCityOfResidence().getId());
+        return UserMapper.toUserDtoWithoutTelegram(userRepo.save(UserMapper.toUser(userDto, city)));
     }
 }

@@ -1,6 +1,9 @@
 package com.example.ucomandbackend.ad;
 
 import com.example.ucomandbackend.ad.dto.VisibilityLevel;
+import com.example.ucomandbackend.city.City;
+import com.example.ucomandbackend.city.District;
+import com.example.ucomandbackend.city.Region;
 import com.example.ucomandbackend.tag.Tag;
 import com.example.ucomandbackend.tag.dto.TagDto;
 import com.example.ucomandbackend.user.User;
@@ -44,10 +47,31 @@ public class AdSpecs {
                 : cb.lessThanOrEqualTo(root.get(Ad.F.user).get(User.F.age), age);
     }
 
-    public Specification<Ad> cityOfResidenceIn(Set<String> cities) {
-        return (root, query, cb) -> CollectionUtils.isEmpty(cities)
+    public Specification<Ad> cityOfResidenceIdIn(Set<Long> cityIds) {
+        return (root, query, cb) -> CollectionUtils.isEmpty(cityIds)
                 ? cb.conjunction()
-                : cb.in(root.get(Ad.F.user).get(User.F.cityOfResidence)).value(cities);
+                : cb.in(root.get(Ad.F.user).get(User.F.cityOfResidence).get(City.F.id)).value(cityIds);
+    }
+
+    public Specification<Ad> regionIdIn(Set<Long> regionIds) {
+        return (root, query, cb) -> CollectionUtils.isEmpty(regionIds)
+                ? cb.conjunction()
+                : cb.in(root.get(Ad.F.user)
+                        .get(User.F.cityOfResidence)
+                        .get(City.F.region)
+                        .get(Region.F.id))
+                .value(regionIds);
+    }
+
+    public Specification<Ad> districtIdIn(Set<Long> cityIds) {
+        return (root, query, cb) -> CollectionUtils.isEmpty(cityIds)
+                ? cb.conjunction()
+                : cb.in(root.get(Ad.F.user)
+                        .get(User.F.cityOfResidence)
+                        .get(City.F.region)
+                        .get(Region.F.district)
+                        .get(District.F.id))
+                .value(cityIds);
     }
 
     public Specification<Ad> tagsIn(Set<TagDto> tags) {

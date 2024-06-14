@@ -1,5 +1,6 @@
 package com.example.ucomandbackend.user;
 
+import com.example.ucomandbackend.city.City;
 import com.example.ucomandbackend.user.dto.Gender;
 import com.example.ucomandbackend.user.dto.UserRole;
 import jakarta.persistence.*;
@@ -46,7 +47,9 @@ public class User implements UserDetails {
 
     private OffsetDateTime dateOfRegistration;
 
-    private String cityOfResidence;
+    @ManyToOne
+    @JoinColumn(name = "city_of_residence_id")
+    private City cityOfResidence;
 
     @Column(unique = true)
     private String telegram;

@@ -1,5 +1,7 @@
 package com.example.ucomandbackend.user;
 
+import com.example.ucomandbackend.city.City;
+import com.example.ucomandbackend.city.CityMapper;
 import com.example.ucomandbackend.user.dto.UserDto;
 import lombok.experimental.UtilityClass;
 
@@ -17,13 +19,13 @@ public class UserMapper {
                 user.getOwnLink(),
                 user.getAboutMe(),
                 user.getDateOfRegistration(),
-                user.getCityOfResidence(),
+                CityMapper.toDto(user.getCityOfResidence()),
                 null,
                 user.getRole()
         );
     }
 
-    public User toUser(UserDto userDto) {
+    public User toUser(UserDto userDto, City city) {
         return new User(
                 userDto.getId(),
                 userDto.getFirstName(),
@@ -34,7 +36,7 @@ public class UserMapper {
                 userDto.getOwnLink(),
                 userDto.getAboutMe(),
                 userDto.getDateOfRegistration(),
-                userDto.getCityOfResidence(),
+                city,
                 userDto.getTelegram(),
                 userDto.getRole()
         );

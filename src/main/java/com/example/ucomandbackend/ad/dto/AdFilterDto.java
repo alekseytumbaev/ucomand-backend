@@ -24,7 +24,9 @@ public class AdFilterDto {
     private Set<Gender> genders;
     private Integer ageGte;
     private Integer ageLte;
-    private Set<String> citiesOfResidence;
+    private Set<Long> cityIds;
+    private Set<Long> regionIds;
+    private Set<Long> districtIds;
     private Set<TagDto> tags;
     private Set<VisibilityLevel> visibilities;
     private OffsetDateTime creationDateGte;
@@ -41,7 +43,9 @@ public class AdFilterDto {
                 .and(gendersIn(genders))
                 .and(ageGte(ageGte))
                 .and(ageLte(ageLte))
-                .and(cityOfResidenceIn(citiesOfResidence))
+                .and(cityOfResidenceIdIn(cityIds))
+                .and(regionIdIn(regionIds))
+                .and(districtIdIn(districtIds))
                 .and(tagsIn(tags))
                 .and(visibilityIn(visibilities))
                 .and(creationDateGte(creationDateGte))
