@@ -17,6 +17,7 @@ public class AdMapper {
     public ResumeDto toResumeDto(AdDto adDto) {
         return new ResumeDto(
                 adDto.getId(),
+                adDto.getTitle(),
                 adDto.getUser(),
                 adDto.getProfession(),
                 adDto.getSkills(),
@@ -33,6 +34,7 @@ public class AdMapper {
     public VacancyDto toVacancyDto(AdDto adDto) {
         return new VacancyDto(
                 adDto.getId(),
+                adDto.getTitle(),
                 adDto.getUser(),
                 adDto.getProfession(),
                 adDto.getSkills(),
@@ -49,6 +51,7 @@ public class AdMapper {
     public AdDto toAdDto(Ad ad) {
         return new AdDto(
                 ad.getId(),
+                ad.getTitle(),
                 UserMapper.toUserDtoWithoutTelegram(ad.getUser()),
                 ad.getProfession() == null ? null : TagMapper.toTagDto(ad.getProfession()),
                 ad.getSkills().stream().map(TagMapper::toTagDto).collect(Collectors.toSet()),
@@ -62,16 +65,10 @@ public class AdMapper {
         );
     }
 
-    public Ad toAdd(AdDto adDto, User user, Set<AdCompetenceLevelTag> competenceLevelTags) {
-        return switch (adDto.getAdType()) {
-            case RESUME -> toAdd(adDto, AdType.RESUME, user, competenceLevelTags);
-            case VACANCY -> toAdd(adDto, AdType.VACANCY, user, competenceLevelTags);
-        };
-    }
-
     public Ad toAdd(AdDto adDto, AdType adType, User user, Set<AdCompetenceLevelTag> competenceLevelTags) {
         return new Ad(
                 adDto.getId(),
+                adDto.getTitle(),
                 adType,
                 user,
                 competenceLevelTags,
@@ -82,5 +79,12 @@ public class AdMapper {
                 adDto.getVisibility(),
                 adDto.getCreationDate()
         );
+    }
+
+    public Ad toAdd(AdDto adDto, User user, Set<AdCompetenceLevelTag> competenceLevelTags) {
+        return switch (adDto.getAdType()) {
+            case RESUME -> toAdd(adDto, AdType.RESUME, user, competenceLevelTags);
+            case VACANCY -> toAdd(adDto, AdType.VACANCY, user, competenceLevelTags);
+        };
     }
 }

@@ -29,6 +29,8 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String title;
+
     @Enumerated(EnumType.STRING)
     private AdType type;
 
