@@ -32,12 +32,14 @@ public class AdminController {
 
     //TODO только рут
     @PostMapping("/signup")
+    @SecurityRequirements
     @Operation(description = "telegram вводится вручную и используется как ключ для входа")
     public TokenDto signup(@RequestBody @Validated({OnCreateAdmin.class, Default.class}) UserDto user) {
         return userService.signup(user);
     }
 
     @PostMapping("/signin")
+    @SecurityRequirements
     public TokenDto signin(@RequestBody @NotBlank String telegram) {
         return userService.signin(telegram);
     }

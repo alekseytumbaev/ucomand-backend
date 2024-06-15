@@ -39,7 +39,7 @@ CREATE TABLE users
     free_link            VARCHAR(255),
     own_link             VARCHAR(255),
     about_me             VARCHAR(255),
-    date_of_registration TIMESTAMP,
+    date_of_registration TIMESTAMP WITH TIME ZONE,
     city_of_residence_id BIGINT,
     telegram             VARCHAR(255) UNIQUE,
     role                 VARCHAR(255),
@@ -60,7 +60,7 @@ CREATE TABLE ads
     contacts      VARCHAR(255),
     details       VARCHAR(255),
     visibility    VARCHAR(255),
-    creation_date TIMESTAMP,
+    creation_date TIMESTAMP WITH TIME ZONE,
     PRIMARY KEY (id)
 );
 ALTER TABLE ads
