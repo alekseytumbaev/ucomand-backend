@@ -1,4 +1,8 @@
 databaseChangeLog:
-  - include:
-      file: ./schema.yaml
-      relativeToChangelogFile: true
+  - changeSet:
+      id: init-schema
+      author: Aleksey Tumbaev
+      changes:
+        - sqlFile:
+            path: /init/schema.sql
+            relativeToChangelogFile: true

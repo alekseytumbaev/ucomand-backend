@@ -23,7 +23,7 @@ public class UserMapper {
                 user.getOwnLink(),
                 user.getAboutMe(),
                 user.getDateOfRegistration(),
-                CityMapper.toDto(user.getCityOfResidence()),
+                user.getCityOfResidence() == null ? null : CityMapper.toDto(user.getCityOfResidence()),
                 null,
                 user.getRole()
         );
