@@ -69,10 +69,12 @@ CREATE SEQUENCE tags_seq START 1 INCREMENT BY 50;
 CREATE TABLE tags
 (
     id   BIGINT NOT NULL,
-    name VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
     type VARCHAR(255),
     PRIMARY KEY (id)
 );
+ALTER TABLE tags
+    ADD CONSTRAINT uc_tags_name_type UNIQUE (name, type);
 
 CREATE SEQUENCE ad_competence_level_tags_seq START 1 INCREMENT BY 50;
 CREATE TABLE ad_competence_level_tags
