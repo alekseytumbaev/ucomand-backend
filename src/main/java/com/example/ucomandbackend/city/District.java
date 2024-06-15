@@ -15,7 +15,7 @@ import lombok.experimental.FieldNameConstants;
 public class District {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     String name;

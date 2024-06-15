@@ -19,7 +19,6 @@ import java.util.Objects;
 public class AdCompetenceLevelTag {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private Long id;
 
     private Integer competenceLevel;
@@ -29,7 +28,6 @@ public class AdCompetenceLevelTag {
     @ToString.Exclude
     private Ad ad;
 
-    //TODO если попытаться удалить из базы тег, связанный с AdCompetenceLevel, то выдаст 409, а должен удалять каскадно
     @ManyToOne
     @JoinColumn(name = "tag_id")
     private Tag tag;
