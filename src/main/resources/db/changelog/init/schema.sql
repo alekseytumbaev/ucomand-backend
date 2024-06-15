@@ -1,4 +1,3 @@
-CREATE SEQUENCE districts_seq START 1 INCREMENT BY 50;
 CREATE TABLE districts
 (
     id   BIGINT NOT NULL,
@@ -6,7 +5,6 @@ CREATE TABLE districts
     PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE regions_seq START 1 INCREMENT BY 50;
 CREATE TABLE regions
 (
     id          BIGINT NOT NULL,
@@ -16,8 +14,8 @@ CREATE TABLE regions
 );
 ALTER TABLE regions
     ADD CONSTRAINT fk_regions_on_district_id FOREIGN KEY (district_id) REFERENCES districts (id) ON DELETE RESTRICT;
+CREATE INDEX idx_regions_on_district_id ON regions (district_id);
 
-CREATE SEQUENCE cities_seq START 1 INCREMENT BY 50;
 CREATE TABLE cities
 (
     id        BIGINT NOT NULL,
@@ -27,6 +25,7 @@ CREATE TABLE cities
 );
 ALTER TABLE cities
     ADD CONSTRAINT fk_cities_on_region_id FOREIGN KEY (region_id) REFERENCES regions (id) ON DELETE RESTRICT;
+CREATE INDEX idx_cities_on_region_id ON cities (region_id);
 
 CREATE SEQUENCE users_seq START 1 INCREMENT BY 50;
 CREATE TABLE users

@@ -14,7 +14,7 @@ public class CityService {
     private final CityRepository cityRepository;
 
     public List<CityDto> getAllCities() {
-        var cities = cityRepository.findAll();
+        var cities = cityRepository.findAllWithRegionAndDistrict();
         return cities.stream().map(CityMapper::toDto).toList();
     }
 

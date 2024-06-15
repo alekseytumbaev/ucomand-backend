@@ -6,3 +6,10 @@ databaseChangeLog:
         - sqlFile:
             path: /init/schema.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: add-cities
+      author: Aleksey Tumbaev
+      changes:
+        - sqlFile:
+            path: /init/add-cities.sql
+            relativeToChangelogFile: true
